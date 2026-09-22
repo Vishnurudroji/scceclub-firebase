@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Attendance | SCCE</title>
+
+    <meta name="description" content="SCCE student attendance dashboard">
+
+    <link rel="stylesheet" href="css/student.css">
+</head>
+
+<body>
+
+    <main class="dashboard">
+        <!-- Student Navigation -->
+        <nav class="student-nav" aria-label="Student navigation">
+
+            <a href="student.html" class="nav-item active" aria-current="page">
+                <span class="nav-icon">🏡</span>
+                <span class="nav-label">Dashboard</span>
+            </a>
+
+            <a href="calculator.html" class="nav-item">
+                <span class="nav-icon">📊</span>
+                <span class="nav-label">Calculator</span>
+            </a>
+
+        </nav>
+        <!-- Header -->
+        <header class="topbar">
+
+            <div class="brand">
+                <div class="brand-icon">✓</div>
+
+                <div>
+                    <div class="brand-name">SCCE Attendance</div>
+                    <div class="brand-subtitle">Student Portal</div>
+                </div>
+            </div>
+
+            <button id="logoutButton" class="logout-button" type="button">
+                Exit
+            </button>
+
+        </header>
+
+
+        <!-- Main content -->
+        <section class="content">
+
+            <div class="welcome-section">
+
+                <div>
+                    <p class="eyebrow">YOUR ATTENDANCE</p>
+
+                    <h1>
+                        Hello, <span id="studentHallTicket">Student</span>
+                    </h1>
+
+                    <p class="welcome-text">
+                        Here's your latest attendance information.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <!-- Attendance overview -->
+            <section class="overview-grid">
+
+                <article class="attendance-card primary-card">
+
+                    <div class="card-label">
+                        Overall Attendance
+                    </div>
+
+                    <div class="attendance-value">
+                        <span id="overallPercentage">--</span>
+                        <small>%</small>
+                    </div>
+
+                    <div class="attendance-meta">
+                        <span id="overallAttended">--</span>
+                        attended
+                        <span class="dot">•</span>
+                        <span id="overallConducted">--</span>
+                        conducted
+                    </div>
+
+                </article>
+
+
+                <article class="attendance-card">
+
+                    <div class="card-label">
+                        Today's Attendance
+                    </div>
+
+                    <div id="todayStatus" class="today-status">
+                        Checking...
+                    </div>
+
+                    <div id="todayDetails" class="attendance-meta">
+                        Please wait
+                    </div>
+
+                </article>
+
+            </section>
+
+
+            <!-- Last updated -->
+            <div class="updated-card">
+
+                <div class="updated-icon">
+                    ↻
+                </div>
+
+                <div>
+                    <div class="updated-label">
+                        Last updated
+                    </div>
+
+                    <div id="lastUpdated">
+                        Checking...
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- Empty state -->
+            <section id="emptyState" class="empty-state hidden">
+
+                <div class="empty-icon">
+                    ✨
+                </div>
+
+                <h2>
+                    Nothing to show... yet.
+                </h2>
+
+                <p>
+                    Your attendance dashboard is ready.
+                    Come back tomorrow and see where you stand.
+                </p>
+
+            </section>
+
+
+            <!-- History -->
+            <section id="historySection" class="history-section">
+
+                <div class="section-heading">
+
+                    <div>
+                        <p class="eyebrow">
+                            ATTENDANCE HISTORY
+                        </p>
+
+                        <h2>
+                            Recent days
+                        </h2>
+                    </div>
+
+                </div>
+
+
+                <div id="historyList" class="history-list">
+
+                    <div class="loading">
+                        Loading attendance...
+                    </div>
+
+                </div>
+
+            </section>
+
+        </section>
+
+
+        <footer>
+            SCCE Student Attendance
+        </footer>
+
+    </main>
+
+
+    <script type="module" src="js/student-dashboard.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,1363 @@
+/* =========================================================
+   SCCE ATTENDANCE
+   STUDENT DASHBOARD
+   LIGHT / PASTEL THEME
+========================================================= */
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   ROOT
+========================================================= */
+
+:root {
+
+    --bg: #f7f9ff;
+
+    --surface: #ffffff;
+    --surface-2: #fafbff;
+
+    --border: #e7eaf1;
+    --border-soft: #eef0f5;
+
+    --text: #172033;
+    --heading: #11182b;
+
+    --muted: #7a8498;
+    --muted-2: #9aa2b2;
+
+    --accent: #6857e8;
+    --accent-light: #8a7bed;
+    --accent-soft: #f0edff;
+
+    --success: #16a875;
+    --success-soft: #e9faf3;
+
+    --danger: #dc5964;
+    --danger-soft: #fff0f2;
+
+    --orange: #c48727;
+    --orange-soft: #fff4dc;
+}
+
+
+/* =========================================================
+   BODY
+========================================================= */
+
+body {
+
+    min-height: 100vh;
+
+    background:
+        radial-gradient(
+            circle at 5% 5%,
+            rgba(104, 87, 232, 0.07),
+            transparent 28%
+        ),
+
+        radial-gradient(
+            circle at 95% 15%,
+            rgba(59, 130, 246, 0.06),
+            transparent 28%
+        ),
+
+        var(--bg);
+
+    color: var(--text);
+
+    font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    -webkit-font-smoothing: antialiased;
+
+    overflow-x: hidden;
+}
+
+
+button {
+    font: inherit;
+}
+
+
+/* =========================================================
+   STUDENT NAVIGATION
+========================================================= */
+
+.student-nav {
+
+    position: fixed;
+
+    left: 50%;
+    bottom: 18px;
+
+    transform: translateX(-50%);
+
+    display: flex;
+    align-items: center;
+
+    gap: 6px;
+
+    padding: 7px;
+
+    background: rgba(255, 255, 255, 0.97);
+
+    border: 1px solid var(--border);
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 12px 35px rgba(25, 35, 65, 0.13),
+        0 3px 10px rgba(25, 35, 65, 0.04);
+
+    z-index: 1000;
+
+    backdrop-filter: blur(12px);
+}
+
+
+/* =========================================================
+   NAV ITEM
+========================================================= */
+
+.nav-item {
+
+    min-width: 120px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 7px;
+
+    padding: 10px 18px;
+
+    border-radius: 13px;
+
+    color: var(--muted);
+
+    text-decoration: none;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+/* =========================================================
+   NAV ICON
+========================================================= */
+
+.nav-icon {
+
+    font-size: 17px;
+
+    line-height: 1;
+
+    transition:
+        transform 0.2s ease;
+}
+
+
+/* =========================================================
+   NAV LABEL
+========================================================= */
+
+.nav-label {
+    line-height: 1;
+}
+
+
+/* =========================================================
+   NAV HOVER
+========================================================= */
+
+.nav-item:hover {
+
+    color: var(--accent);
+
+    transform: translateY(-1px);
+}
+
+
+.nav-item:hover .nav-icon {
+
+    transform: scale(1.08);
+}
+
+
+/* =========================================================
+   ACTIVE NAV
+========================================================= */
+
+.nav-item.active {
+
+    background: var(--accent-soft);
+
+    color: var(--accent);
+
+    box-shadow:
+        inset 0 0 0 1px rgba(104, 87, 232, 0.04);
+}
+
+
+.nav-item.active .nav-icon {
+
+    transform: scale(1.08);
+}
+
+
+/* =========================================================
+   PRESS EFFECT
+========================================================= */
+
+.nav-item:active {
+
+    transform: scale(0.96);
+}
+
+
+/* =========================================================
+   DASHBOARD
+========================================================= */
+
+.dashboard {
+
+    width: 100%;
+
+    max-width: 1050px;
+
+    min-height: 100vh;
+
+    margin: 0 auto;
+
+    padding:
+        28px
+        24px
+        20px;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.topbar {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding-bottom: 25px;
+
+    border-bottom:
+        1px solid var(--border);
+}
+
+
+/* =========================================================
+   BRAND
+========================================================= */
+
+.brand {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+}
+
+
+/* =========================================================
+   SCCE BRAND ICON
+========================================================= */
+
+.brand-icon {
+
+    width: 42px;
+    height: 42px;
+
+    display: grid;
+
+    place-items: center;
+
+    border-radius: 13px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #6857e8,
+            #8a7bed
+        );
+
+    color: #ffffff;
+
+    font-size: 22px;
+
+    font-weight: 900;
+
+    box-shadow:
+        0 8px 20px
+        rgba(104, 87, 232, 0.22);
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+
+/* Decorative shine */
+
+.brand-icon::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 24px;
+    height: 24px;
+
+    top: -10px;
+    right: -8px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255, 255, 255, 0.20);
+}
+
+
+.brand-icon span {
+
+    position: relative;
+
+    z-index: 1;
+
+    transform:
+        translateY(-1px);
+}
+
+
+/* =========================================================
+   BRAND TEXT
+========================================================= */
+
+.brand-name {
+
+    color: #151b2d;
+
+    font-size: 15px;
+
+    font-weight: 750;
+}
+
+
+.brand-subtitle {
+
+    margin-top: 2px;
+
+    color: #8790a3;
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+.logout-button {
+
+    border:
+        1px solid #e2e5ec;
+
+    background: #ffffff;
+
+    color: #687286;
+
+    padding:
+        9px
+        15px;
+
+    border-radius: 10px;
+
+    font-size: 12px;
+
+    font-weight: 650;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.15s ease;
+}
+
+
+.logout-button:hover {
+
+    background: #f5f3ff;
+
+    color: var(--accent);
+
+    border-color: #ddd8fa;
+}
+
+
+.logout-button:active {
+
+    transform: scale(0.97);
+}
+
+
+/* =========================================================
+   MAIN CONTENT
+========================================================= */
+
+.content {
+
+    padding-top: 48px;
+}
+
+
+/* =========================================================
+   WELCOME
+========================================================= */
+
+.welcome-section {
+
+    margin-bottom: 32px;
+}
+
+
+.eyebrow {
+
+    margin-bottom: 8px;
+
+    color: #8b84d6;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.13em;
+}
+
+
+.welcome-section h1 {
+
+    color: var(--heading);
+
+    font-size:
+        clamp(
+            32px,
+            5vw,
+            46px
+        );
+
+    line-height: 1.05;
+
+    letter-spacing: -1.8px;
+
+    font-weight: 850;
+}
+
+
+.welcome-section h1 span {
+
+    color: var(--accent);
+}
+
+
+.welcome-text {
+
+    margin-top: 12px;
+
+    color: var(--muted);
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   OVERVIEW
+========================================================= */
+
+.overview-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        1.15fr
+        1fr;
+
+    gap: 16px;
+}
+
+
+.attendance-card {
+
+    min-height: 205px;
+
+    padding: 26px;
+
+    background: var(--surface);
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 22px;
+
+    box-shadow:
+        0 10px 30px
+        rgba(
+            25,
+            35,
+            65,
+            0.035
+        );
+}
+
+
+/* =========================================================
+   PRIMARY ATTENDANCE CARD
+========================================================= */
+
+.primary-card {
+
+    background:
+        linear-gradient(
+            145deg,
+            #f1eeff,
+            #ffffff 65%
+        );
+
+    border-color:
+        #e4dfff;
+
+    box-shadow:
+        0 12px 35px
+        rgba(
+            104,
+            87,
+            232,
+            0.07
+        );
+}
+
+
+.card-label {
+
+    color: #7f8798;
+
+    font-size: 12px;
+
+    font-weight: 650;
+}
+
+
+/* =========================================================
+   ATTENDANCE VALUE
+========================================================= */
+
+.attendance-value {
+
+    margin-top: 24px;
+
+    color: #171f31;
+
+    font-size: 62px;
+
+    line-height: 1;
+
+    letter-spacing: -3px;
+
+    font-weight: 850;
+}
+
+
+.attendance-value small {
+
+    margin-left: 4px;
+
+    color: var(--accent);
+
+    font-size: 24px;
+
+    letter-spacing: 0;
+}
+
+
+.attendance-meta {
+
+    margin-top: 16px;
+
+    color: #8c94a5;
+
+    font-size: 13px;
+}
+
+
+.dot {
+
+    margin:
+        0
+        7px;
+
+    color: #c4c8d1;
+}
+
+
+/* =========================================================
+   TODAY
+========================================================= */
+
+.today-status {
+
+    margin-top: 34px;
+
+    color: #30394c;
+
+    font-size: 26px;
+
+    font-weight: 800;
+
+    letter-spacing: -0.8px;
+}
+
+
+.today-status.present {
+
+    color: var(--success);
+}
+
+
+.today-status.absent {
+
+    color: var(--danger);
+}
+
+
+.today-status.not-available {
+
+    color: #8b93a3;
+}
+
+
+#todayDetails {
+
+    margin-top: 9px;
+
+    color: #929aaa;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   UPDATED CARD
+========================================================= */
+
+.updated-card {
+
+    margin-top: 16px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+    padding:
+        16px
+        20px;
+
+    background: #ffffff;
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 8px 25px
+        rgba(
+            25,
+            35,
+            65,
+            0.025
+        );
+}
+
+
+.updated-icon {
+
+    width: 34px;
+    height: 34px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 10px;
+
+    background: var(--accent-soft);
+
+    color: var(--accent);
+
+    font-size: 16px;
+}
+
+
+.updated-label {
+
+    color: #929aaa;
+
+    font-size: 11px;
+}
+
+
+#lastUpdated {
+
+    margin-top: 2px;
+
+    color: #667084;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   HISTORY
+========================================================= */
+
+.history-section {
+
+    margin-top: 48px;
+}
+
+
+.section-heading {
+
+    margin-bottom: 18px;
+}
+
+
+.section-heading h2 {
+
+    color: var(--heading);
+
+    font-size: 24px;
+
+    letter-spacing: -0.8px;
+
+    font-weight: 800;
+}
+
+
+.history-list {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+
+/* =========================================================
+   HISTORY ITEM
+========================================================= */
+
+.history-item {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding:
+        17px
+        20px;
+
+    background: #ffffff;
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 15px;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.15s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.history-item:hover {
+
+    background: #fcfcff;
+
+    border-color: #ddd9f5;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 8px 22px
+        rgba(
+            25,
+            35,
+            65,
+            0.04
+        );
+}
+
+
+/* =========================================================
+   HISTORY DATE
+========================================================= */
+
+.history-date {
+
+    color: #30394c;
+
+    font-size: 14px;
+
+    font-weight: 650;
+}
+
+
+.history-subtitle {
+
+    margin-top: 4px;
+
+    color: #9aa2b2;
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   HISTORY PERCENTAGE
+========================================================= */
+
+.history-percentage {
+
+    font-size: 15px;
+
+    font-weight: 750;
+}
+
+
+.history-percentage.present {
+
+    color: var(--success);
+}
+
+
+.history-percentage.absent {
+
+    color: var(--danger);
+}
+
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.empty-state {
+
+    margin-top: 48px;
+
+    padding:
+        55px
+        25px;
+
+    text-align: center;
+
+    background: #ffffff;
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 22px;
+
+    box-shadow:
+        0 10px 30px
+        rgba(
+            25,
+            35,
+            65,
+            0.035
+        );
+}
+
+
+.empty-state.hidden {
+
+    display: none !important;
+}
+
+
+.empty-icon {
+
+    width: 54px;
+    height: 54px;
+
+    margin:
+        0
+        auto
+        18px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 16px;
+
+    background: var(--accent-soft);
+
+    font-size: 24px;
+}
+
+
+.empty-state h2 {
+
+    color: #293144;
+
+    font-size: 21px;
+
+    letter-spacing: -0.5px;
+
+    font-weight: 800;
+}
+
+
+.empty-state p {
+
+    max-width: 380px;
+
+    margin:
+        10px
+        auto
+        0;
+
+    color: #929aaa;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   HIDDEN
+========================================================= */
+
+.hidden {
+
+    display: none !important;
+}
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.loading {
+
+    padding: 30px;
+
+    text-align: center;
+
+    color: #929aaa;
+
+    font-size: 13px;
+}
+
+
+.loading::before {
+
+    content: "";
+
+    display: inline-block;
+
+    width: 15px;
+    height: 15px;
+
+    margin-right: 9px;
+
+    vertical-align: -3px;
+
+    border:
+        2px solid #e9e9f0;
+
+    border-top-color:
+        var(--accent);
+
+    border-radius: 50%;
+
+    animation:
+        studentSpin 0.8s linear infinite;
+}
+
+
+@keyframes studentSpin {
+
+    to {
+
+        transform:
+            rotate(360deg);
+
+    }
+
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer {
+
+    margin-top: 70px;
+
+    padding-top: 20px;
+
+    border-top:
+        1px solid var(--border);
+
+    color: #a1a8b6;
+
+    text-align: center;
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .dashboard {
+
+        padding:
+            20px
+            16px;
+    }
+
+
+    .content {
+
+        padding-top: 36px;
+    }
+
+
+    .overview-grid {
+
+        grid-template-columns: 1fr;
+    }
+
+
+    .attendance-card {
+
+        min-height: 180px;
+
+        padding: 22px;
+    }
+
+
+    .attendance-value {
+
+        font-size: 54px;
+    }
+
+
+    .today-status {
+
+        margin-top: 25px;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 430px) {
+
+    .dashboard {
+
+        padding:
+            18px
+            14px;
+    }
+
+
+    .topbar {
+
+        padding-bottom: 24px;
+    }
+
+
+    .brand {
+
+        gap: 9px;
+    }
+
+
+    .brand-icon {
+
+        width: 37px;
+        height: 37px;
+
+        border-radius: 10px;
+
+        font-size: 17px;
+    }
+
+
+    .brand-name {
+
+        font-size: 14px;
+    }
+
+
+    .brand-subtitle {
+
+        font-size: 10px;
+    }
+
+
+    .logout-button {
+
+        padding:
+            8px
+            12px;
+
+        font-size: 11px;
+    }
+
+
+    .content {
+
+        padding-top: 30px;
+    }
+
+
+    .welcome-section {
+
+        margin-bottom: 25px;
+    }
+
+
+    .welcome-section h1 {
+
+        font-size: 34px;
+
+        letter-spacing: -1.5px;
+    }
+
+
+    .welcome-text {
+
+        font-size: 13px;
+    }
+
+
+    .attendance-card {
+
+        padding: 20px;
+
+        border-radius: 18px;
+    }
+
+
+    .attendance-value {
+
+        margin-top: 20px;
+
+        font-size: 52px;
+
+        letter-spacing: -2.5px;
+    }
+
+
+    .attendance-meta {
+
+        font-size: 12px;
+    }
+
+
+    .today-status {
+
+        font-size: 24px;
+    }
+
+
+    .updated-card {
+
+        padding:
+            14px
+            16px;
+    }
+
+
+    .history-section {
+
+        margin-top: 38px;
+    }
+
+
+    .section-heading h2 {
+
+        font-size: 22px;
+    }
+
+
+    .history-item {
+
+        padding:
+            15px
+            16px;
+    }
+
+
+    .history-date {
+
+        font-size: 13px;
+    }
+
+
+    .history-subtitle {
+
+        font-size: 11px;
+    }
+
+
+    .history-percentage {
+
+        font-size: 14px;
+    }
+
+
+    .empty-state {
+
+        margin-top: 35px;
+
+        padding:
+            45px
+            20px;
+    }
+
+
+    footer {
+
+        margin-top: 50px;
+    }
+
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+========================================================= */
+
+@media (max-width: 350px) {
+
+    .brand-subtitle {
+
+        display: none;
+    }
+
+
+    .brand-name {
+
+        font-size: 13px;
+    }
+
+
+    .logout-button {
+
+        padding:
+            7px
+            10px;
+
+        font-size: 10px;
+    }
+
+
+    .welcome-section h1 {
+
+        font-size: 31px;
+    }
+
+
+    .attendance-value {
+
+        font-size: 47px;
+    }
+
+
+    .student-nav {
+
+        width: calc(100% - 20px);
+
+        bottom: 10px;
+    }
+
+
+    .nav-item {
+
+        min-width: 0;
+
+        padding:
+            10px
+            6px;
+
+        font-size: 11px;
+    }
+
+
+    .nav-icon {
+
+        font-size: 16px;
+    }
+
+}

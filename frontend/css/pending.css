@@ -1,0 +1,924 @@
+/* =========================================================
+   SCCE ATTENDANCE
+   REGISTRATION PENDING
+========================================================= */
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+body {
+    min-height: 100vh;
+
+    background:
+        radial-gradient(
+            circle at 10% 10%,
+            rgba(104, 87, 232, 0.08),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 90% 20%,
+            rgba(59, 130, 246, 0.07),
+            transparent 30%
+        ),
+        #f7f9ff;
+
+    color: #172033;
+
+    font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    -webkit-font-smoothing: antialiased;
+}
+
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.pending-page {
+    min-height: 100vh;
+
+    padding:
+        24px
+        28px
+        18px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* =========================================================
+   TOP BAR
+========================================================= */
+
+.pending-topbar {
+    width: 100%;
+    max-width: 1120px;
+
+    margin: 0 auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+/* =========================================================
+   BRAND
+========================================================= */
+
+.pending-brand {
+    display: flex;
+    align-items: center;
+
+    gap: 11px;
+
+    color: inherit;
+
+    text-decoration: none;
+
+    user-select: none;
+}
+
+
+.pending-brand-icon {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 13px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #eeeaff,
+            #e5e1ff
+        );
+
+    color: #6857e8;
+
+    font-size: 20px;
+    font-weight: 900;
+
+    box-shadow:
+        0 6px 18px rgba(104, 87, 232, 0.12);
+}
+
+
+.pending-brand-text {
+    display: flex;
+    flex-direction: column;
+
+    gap: 1px;
+}
+
+
+.pending-brand-text strong {
+    color: #151b2d;
+
+    font-size: 15px;
+
+    font-weight: 750;
+
+    letter-spacing: -0.25px;
+}
+
+
+.pending-brand-text span {
+    color: #8790a3;
+
+    font-size: 11px;
+
+    font-weight: 500;
+}
+
+
+/* =========================================================
+   TOP STATUS
+========================================================= */
+
+.pending-status {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 7px;
+
+    padding:
+        7px
+        11px;
+
+    border-radius: 999px;
+
+    background: rgba(255, 255, 255, 0.85);
+
+    border: 1px solid #e8ebf2;
+
+    color: #69738a;
+
+    font-size: 10px;
+
+    font-weight: 650;
+
+    box-shadow:
+        0 4px 15px rgba(20, 30, 60, 0.03);
+}
+
+
+.status-dot {
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: #f0a53c;
+
+    box-shadow:
+        0 0 0 4px rgba(240, 165, 60, 0.10);
+}
+
+
+/* =========================================================
+   MAIN CONTENT
+========================================================= */
+
+.pending-content {
+    width: 100%;
+    max-width: 600px;
+
+    margin:
+        0 auto;
+
+    padding:
+        65px
+        0
+        30px;
+
+    text-align: center;
+
+    position: relative;
+}
+
+
+/* =========================================================
+   DECORATIONS
+========================================================= */
+
+.floating-shape {
+    position: absolute;
+
+    pointer-events: none;
+
+    user-select: none;
+
+    opacity: 0.5;
+}
+
+
+.shape-one {
+    top: 85px;
+    left: -30px;
+
+    color: #a79cf0;
+
+    font-size: 22px;
+
+    transform: rotate(-15deg);
+}
+
+
+.shape-two {
+    top: 150px;
+    right: -30px;
+
+    color: #e9a85e;
+
+    font-size: 25px;
+
+    transform: rotate(15deg);
+}
+
+
+/* =========================================================
+   PENDING ICON
+========================================================= */
+
+.pending-icon-wrap {
+    width: 76px;
+    height: 76px;
+
+    margin:
+        0 auto
+        20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 24px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #fff7e6,
+            #fff1d2
+        );
+
+    border: 1px solid #f6dfb5;
+
+    box-shadow:
+        0 12px 30px rgba(220, 160, 60, 0.10);
+}
+
+
+.pending-icon {
+    font-size: 34px;
+
+    line-height: 1;
+
+    animation:
+        gentleFloat 2.5s ease-in-out infinite;
+}
+
+
+@keyframes gentleFloat {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-4px);
+    }
+
+}
+
+
+/* =========================================================
+   BADGE
+========================================================= */
+
+.pending-badge {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 7px;
+
+    padding:
+        7px
+        12px;
+
+    border-radius: 999px;
+
+    background: #fff7e7;
+
+    border: 1px solid #f5e2bd;
+
+    color: #b47720;
+
+    font-size: 10px;
+
+    font-weight: 750;
+}
+
+
+.pending-badge span {
+    width: 6px;
+    height: 6px;
+
+    border-radius: 50%;
+
+    background: #e7a33d;
+
+    animation:
+        statusPulse 1.8s ease-in-out infinite;
+}
+
+
+@keyframes statusPulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.4;
+    }
+
+}
+
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+.pending-content h1 {
+    margin-top: 20px;
+
+    color: #11182b;
+
+    font-size:
+        clamp(
+            48px,
+            8vw,
+            67px
+        );
+
+    line-height: 0.98;
+
+    letter-spacing: -3.5px;
+
+    font-weight: 850;
+}
+
+
+.pending-content h1 span {
+    color: #6857e8;
+}
+
+
+/* =========================================================
+   DESCRIPTION
+========================================================= */
+
+.pending-description {
+    max-width: 470px;
+
+    margin:
+        19px auto
+        0;
+
+    color: #6d778b;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   WAITING CARD
+========================================================= */
+
+.waiting-card {
+    margin-top: 28px;
+
+    padding: 18px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    text-align: left;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffffff,
+            #fffdf8
+        );
+
+    border:
+        1px solid #eee7d9;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 10px 30px rgba(40, 45, 70, 0.04);
+}
+
+
+.waiting-icon {
+    width: 43px;
+    height: 43px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background: #fff4dc;
+
+    font-size: 19px;
+}
+
+
+.waiting-content {
+    min-width: 0;
+}
+
+
+.waiting-content strong {
+    display: block;
+
+    color: #30394c;
+
+    font-size: 12px;
+
+    font-weight: 750;
+}
+
+
+.waiting-content p {
+    margin-top: 4px;
+
+    color: #8b94a5;
+
+    font-size: 10px;
+
+    line-height: 1.55;
+}
+
+
+/* =========================================================
+   PROCESS CARD
+========================================================= */
+
+.process-card {
+    margin-top: 14px;
+
+    padding: 19px;
+
+    text-align: left;
+
+    background: #ffffff;
+
+    border:
+        1px solid #e7eaf1;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 10px 30px rgba(25, 35, 65, 0.035);
+}
+
+
+.process-title {
+    color: #8b92a3;
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.1px;
+
+    text-transform: uppercase;
+
+    margin-bottom: 16px;
+}
+
+
+/* =========================================================
+   PROCESS STEPS
+========================================================= */
+
+.process-step {
+    display: flex;
+    align-items: center;
+
+    gap: 11px;
+}
+
+
+.step-circle {
+    width: 30px;
+    height: 30px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #f0f1f5;
+
+    color: #9aa2b2;
+
+    font-size: 10px;
+
+    font-weight: 800;
+}
+
+
+.process-step.completed
+.step-circle {
+    background: #eaf8f2;
+
+    color: #169568;
+}
+
+
+.process-step.current
+.step-circle {
+    background: #eeeaff;
+
+    color: #6857e8;
+
+    box-shadow:
+        0 0 0 4px rgba(
+            104,
+            87,
+            232,
+            0.07
+        );
+}
+
+
+.step-info {
+    display: flex;
+    flex-direction: column;
+
+    gap: 2px;
+}
+
+
+.step-info strong {
+    color: #3b4355;
+
+    font-size: 10px;
+
+    font-weight: 750;
+}
+
+
+.step-info span {
+    color: #9aa2b1;
+
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   STEP LINE
+========================================================= */
+
+.step-line {
+    width: 1px;
+    height: 19px;
+
+    margin:
+        3px
+        0
+        3px
+        14px;
+
+    background: #e6e8ee;
+}
+
+
+.step-line.completed-line {
+    background: #ccefe0;
+}
+
+
+/* =========================================================
+   BACK BUTTON
+========================================================= */
+
+.back-button {
+    width: 100%;
+    height: 50px;
+
+    margin-top: 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 9px;
+
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #6857e8,
+            #5b49d5
+        );
+
+    color: #ffffff;
+
+    font-size: 12px;
+
+    font-weight: 750;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 9px 20px rgba(
+            104,
+            87,
+            232,
+            0.18
+        );
+
+    transition:
+        transform 0.15s ease,
+        box-shadow 0.2s ease,
+        filter 0.2s ease;
+}
+
+
+.back-button:hover {
+    transform: translateY(-1px);
+
+    filter: brightness(1.03);
+
+    box-shadow:
+        0 12px 25px rgba(
+            104,
+            87,
+            232,
+            0.23
+        );
+}
+
+
+.back-button:active {
+    transform: translateY(0);
+
+    box-shadow:
+        0 6px 13px rgba(
+            104,
+            87,
+            232,
+            0.15
+        );
+}
+
+
+.back-button span:first-child {
+    font-size: 17px;
+}
+
+
+/* =========================================================
+   PRIVATE NOTE
+========================================================= */
+
+.pending-note {
+    margin-top: 14px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 6px;
+
+    color: #9aa2b1;
+
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.pending-footer {
+    width: 100%;
+    max-width: 1120px;
+
+    margin:
+        auto
+        auto
+        0;
+
+    padding-top: 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    border-top:
+        1px solid #e8ebf2;
+
+    color: #a1a8b6;
+
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 620px) {
+
+    .pending-page {
+        padding:
+            16px
+            14px
+            18px;
+    }
+
+
+    .pending-brand-icon {
+        width: 39px;
+        height: 39px;
+
+        border-radius: 11px;
+
+        font-size: 18px;
+    }
+
+
+    .pending-brand-text strong {
+        font-size: 13px;
+    }
+
+
+    .pending-brand-text span {
+        font-size: 10px;
+    }
+
+
+    .pending-status {
+        padding:
+            6px
+            9px;
+
+        font-size: 8px;
+    }
+
+
+    .pending-content {
+        padding-top: 45px;
+    }
+
+
+    .floating-shape {
+        display: none;
+    }
+
+
+    .pending-icon-wrap {
+        width: 68px;
+        height: 68px;
+
+        border-radius: 21px;
+    }
+
+
+    .pending-icon {
+        font-size: 29px;
+    }
+
+
+    .pending-content h1 {
+        font-size: 46px;
+
+        letter-spacing: -2.7px;
+    }
+
+
+    .pending-description {
+        font-size: 12px;
+
+        line-height: 1.65;
+    }
+
+
+    .waiting-card {
+        padding: 15px;
+
+        gap: 11px;
+    }
+
+
+    .waiting-icon {
+        width: 39px;
+        height: 39px;
+
+        border-radius: 10px;
+
+        font-size: 17px;
+    }
+
+
+    .waiting-content strong {
+        font-size: 11px;
+    }
+
+
+    .waiting-content p {
+        font-size: 9px;
+    }
+
+
+    .process-card {
+        padding: 16px;
+    }
+
+
+    .back-button {
+        height: 49px;
+    }
+
+
+    .pending-footer {
+        font-size: 8px;
+    }
+
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+========================================================= */
+
+@media (max-width: 380px) {
+
+    .pending-content {
+        padding-top: 35px;
+    }
+
+
+    .pending-content h1 {
+        font-size: 41px;
+
+        letter-spacing: -2.2px;
+    }
+
+
+    .pending-description {
+        font-size: 11px;
+    }
+
+
+    .pending-status {
+        display: none;
+    }
+
+}

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SCCE Attendance</title>
+
+    <meta
+        name="description"
+        content="Check your SCCE student attendance"
+    >
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <main class="page">
+
+        <section class="welcome-card">
+
+            <div class="logo" id="secretAdminTrigger">
+    <span class="logo-icon">✓</span>
+    <span>SCCE Attendance</span>
+</div>
+
+            <div class="hero">
+
+                <div class="hero-badge">
+                    Student Portal
+                </div>
+
+                <h1>
+                    Check your<br>
+                    <span>attendance.</span>
+                </h1>
+
+                <p>
+                    Enter your hall ticket number to view
+                    your attendance details.
+                </p>
+
+                <form id="studentForm">
+
+                    <label for="hallTicket">
+                        Hall Ticket Number
+                    </label>
+
+                    <div class="input-wrapper">
+                        <input
+                            type="text"
+                            id="hallTicket"
+                            name="hallTicket"
+                            placeholder="e.g. 23N01A0501"
+                            autocomplete="off"
+                            autocapitalize="characters"
+                            required
+                        >
+                    </div>
+
+                    <button
+                        type="submit"
+                        id="proceedButton"
+                    >
+                        <span>Proceed</span>
+                        <span class="arrow">→</span>
+                    </button>
+
+                </form>
+
+                <p
+                    id="errorMessage"
+                    class="error-message"
+                ></p>
+
+            </div>
+
+            <div class="footer-note">
+                <span>●</span>
+                SCCE Student Attendance
+            </div>
+
+        </section>
+
+    </main>
+
+    <script
+        type="module"
+        src="js/student.js"
+    ></script>
+
+</body>
+</html>

@@ -1,0 +1,1312 @@
+/* =========================================================
+   SCCE ATTENDANCE
+   CALCULATOR
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+:root {
+
+    --bg: #f7f9ff;
+
+    --surface: #ffffff;
+
+    --surface-2: #fafbff;
+
+    --border: #e7eaf1;
+
+    --text: #172033;
+
+    --heading: #11182b;
+
+    --muted: #7a8498;
+
+    --accent: #6857e8;
+
+    --accent-light: #8a7bed;
+
+    --accent-soft: #f0edff;
+
+    --success: #16a875;
+
+    --success-soft: #e9faf3;
+
+    --danger: #dc5964;
+
+    --danger-soft: #fff0f2;
+
+    --orange: #c48727;
+
+    --orange-soft: #fff4dc;
+
+    --blue: #4b7bec;
+
+    --blue-soft: #edf3ff;
+}
+
+
+body {
+
+    min-height: 100vh;
+
+    background:
+        radial-gradient(
+            circle at 5% 5%,
+            rgba(104, 87, 232, 0.07),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 95% 15%,
+            rgba(59, 130, 246, 0.06),
+            transparent 28%
+        ),
+        var(--bg);
+
+    color: var(--text);
+
+    font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    -webkit-font-smoothing: antialiased;
+
+    padding-bottom: 90px;
+}
+
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.calculator-page {
+
+    width: 100%;
+
+    max-width: 1050px;
+
+    margin: auto;
+
+    padding:
+        28px
+        24px
+        40px;
+}
+
+
+/* =========================================================
+   TOPBAR
+========================================================= */
+
+.topbar {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding-bottom: 25px;
+
+    border-bottom:
+        1px solid var(--border);
+}
+
+
+.brand {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+}
+
+
+.brand-icon {
+
+    width: 40px;
+    height: 40px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #eeeaff,
+            #e5e1ff
+        );
+
+    font-size: 19px;
+
+    box-shadow:
+        0 6px 18px
+        rgba(104, 87, 232, 0.10);
+}
+
+
+.brand-name {
+
+    color: #151b2d;
+
+    font-size: 15px;
+
+    font-weight: 750;
+}
+
+
+.brand-subtitle {
+
+    margin-top: 2px;
+
+    color: #8790a3;
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   STUDENT
+========================================================= */
+
+.student-mini {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+}
+
+
+.student-mini strong {
+
+    display: block;
+
+    color: var(--heading);
+
+    font-size: 13px;
+}
+
+
+.student-mini small {
+
+    display: block;
+
+    margin-top: 2px;
+
+    color: var(--muted);
+
+    font-size: 10px;
+}
+
+
+.avatar {
+
+    width: 36px;
+    height: 36px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #7565ed,
+            #5746d9
+        );
+
+    color: white;
+
+    font-size: 13px;
+
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.content {
+
+    padding-top: 38px;
+}
+
+
+/* =========================================================
+   PAGE HEADING
+========================================================= */
+
+.page-heading {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    margin-bottom: 25px;
+}
+
+
+.calculator-icon {
+
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 14px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #7162ed,
+            #5c4bd8
+        );
+
+    color: white;
+
+    font-size: 22px;
+
+    box-shadow:
+        0 10px 25px
+        rgba(104, 87, 232, 0.18);
+}
+
+
+.page-heading h1 {
+
+    color: var(--heading);
+
+    font-size: 32px;
+
+    line-height: 1.1;
+
+    letter-spacing: -1.2px;
+
+    font-weight: 850;
+}
+
+
+.page-heading p {
+
+    margin-top: 5px;
+
+    color: var(--muted);
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.card {
+
+    margin-bottom: 16px;
+
+    padding: 22px;
+
+    background: var(--surface);
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 10px 30px
+        rgba(25, 35, 65, 0.035);
+}
+
+
+/* =========================================================
+   TARGET
+========================================================= */
+
+.target-card {
+
+    display: flex;
+
+    gap: 15px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #f1eeff,
+            #ffffff 70%
+        );
+
+    border-color: #e4dfff;
+}
+
+
+.section-icon {
+
+    width: 40px;
+    height: 40px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    font-size: 19px;
+}
+
+
+.section-icon.purple {
+
+    background: var(--accent-soft);
+
+    color: var(--accent);
+}
+
+
+.section-icon.green {
+
+    background: var(--success-soft);
+
+    color: var(--success);
+}
+
+
+.section-icon.red {
+
+    background: var(--danger-soft);
+
+    color: var(--danger);
+}
+
+
+.section-icon.orange {
+
+    background: var(--orange-soft);
+
+    color: var(--orange);
+}
+
+
+.section-icon.blue {
+
+    background: var(--blue-soft);
+
+    color: var(--blue);
+}
+
+
+.section-content {
+
+    flex: 1;
+}
+
+
+.section-content h2,
+.scenario-header h2,
+.target-result-content h2 {
+
+    color: var(--heading);
+
+    font-size: 17px;
+
+    font-weight: 800;
+}
+
+
+.section-content p,
+.scenario-header p,
+.target-result-content p {
+
+    margin-top: 5px;
+
+    color: var(--muted);
+
+    font-size: 13px;
+
+    line-height: 1.5;
+}
+
+
+select {
+
+    width: 100%;
+
+    margin-top: 12px;
+
+    padding:
+        12px
+        14px;
+
+    background: #ffffff;
+
+    color: var(--text);
+
+    border:
+        1px solid #dfe3ed;
+
+    border-radius: 11px;
+
+    outline: none;
+
+    font-size: 14px;
+
+    font-weight: 650;
+
+    cursor: pointer;
+}
+
+
+select:focus {
+
+    border-color: var(--accent);
+
+    box-shadow:
+        0 0 0 3px
+        rgba(104, 87, 232, 0.10);
+}
+
+
+/* =========================================================
+   CURRENT
+========================================================= */
+
+.current-card {
+
+    display: grid;
+
+    grid-template-columns: 210px 1fr;
+
+    align-items: center;
+
+    gap: 28px;
+}
+
+
+.percentage-circle {
+
+    width: 190px;
+    height: 190px;
+
+    margin: auto;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        conic-gradient(
+            var(--accent) 0deg,
+            #7464ec 246deg,
+            #e5e7f0 246deg,
+            #e5e7f0 360deg
+        );
+
+    position: relative;
+}
+
+
+.percentage-circle::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 158px;
+    height: 158px;
+
+    border-radius: 50%;
+
+    background: white;
+}
+
+
+.percentage-circle > div {
+
+    position: relative;
+
+    z-index: 1;
+
+    text-align: center;
+}
+
+
+.percentage-circle strong {
+
+    display: block;
+
+    color: var(--heading);
+
+    font-size: 34px;
+
+    letter-spacing: -1.5px;
+
+    font-weight: 850;
+}
+
+
+.percentage-circle span {
+
+    display: block;
+
+    margin-top: 4px;
+
+    color: var(--muted);
+
+    font-size: 12px;
+
+    line-height: 1.4;
+}
+
+
+.current-info {
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 12px;
+}
+
+
+.stat-box {
+
+    padding: 17px;
+
+    border-radius: 15px;
+}
+
+
+.green-box {
+
+    background: var(--success-soft);
+}
+
+
+.purple-box {
+
+    background: var(--accent-soft);
+}
+
+
+.stat-box strong {
+
+    display: block;
+
+    color: var(--heading);
+
+    font-size: 25px;
+
+    font-weight: 850;
+}
+
+
+.stat-box span {
+
+    display: block;
+
+    margin-top: 3px;
+
+    color: var(--muted);
+
+    font-size: 11px;
+}
+
+
+.status-box {
+
+    grid-column: 1 / -1;
+
+    padding: 15px;
+
+    border-radius: 14px;
+
+    background: var(--success-soft);
+
+    color: #087d58;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   TARGET RESULT
+========================================================= */
+
+.target-result-card {
+
+    display: flex;
+
+    gap: 15px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #fffaf0,
+            #ffffff
+        );
+}
+
+
+.target-result-content {
+
+    flex: 1;
+}
+
+
+.big-result {
+
+    margin-top: 15px;
+
+    color: var(--heading);
+
+    font-size: 32px;
+
+    font-weight: 850;
+
+    letter-spacing: -1px;
+}
+
+
+.result-message {
+
+    margin-top: 7px;
+
+    color: var(--success);
+
+    font-size: 13px;
+
+    font-weight: 650;
+}
+
+
+/* =========================================================
+   SCENARIOS
+========================================================= */
+
+.scenario-header {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+    margin-bottom: 17px;
+}
+
+
+.scenario-body {
+
+    display: grid;
+
+    grid-template-columns: 180px 1fr;
+
+    gap: 15px;
+
+    align-items: center;
+}
+
+
+.select-area label {
+
+    display: block;
+
+    color: var(--muted);
+
+    font-size: 11px;
+
+    font-weight: 650;
+}
+
+
+.select-area select {
+
+    margin-top: 7px;
+}
+
+
+.select-area span {
+
+    display: block;
+
+    margin-top: 5px;
+
+    color: var(--muted);
+
+    font-size: 11px;
+}
+
+
+.attend-card {
+
+    background:
+        linear-gradient(
+            145deg,
+            #f4fffb,
+            #ffffff
+        );
+
+    border-color: #d7f0e6;
+}
+
+
+.miss-card {
+
+    background:
+        linear-gradient(
+            145deg,
+            #fff7f8,
+            #ffffff
+        );
+
+    border-color: #f5dce0;
+}
+
+
+.scenario-result {
+
+    padding: 18px;
+
+    border-radius: 15px;
+
+    text-align: center;
+}
+
+
+.green-result {
+
+    background: var(--success-soft);
+}
+
+
+.red-result {
+
+    background: var(--danger-soft);
+}
+
+
+.scenario-result span {
+
+    display: block;
+
+    color: var(--muted);
+
+    font-size: 11px;
+}
+
+
+.scenario-result strong {
+
+    display: block;
+
+    margin-top: 4px;
+
+    font-size: 29px;
+
+    font-weight: 850;
+}
+
+
+.green-result strong {
+
+    color: #087d58;
+}
+
+
+.red-result strong {
+
+    color: var(--danger);
+}
+
+
+.scenario-result small {
+
+    display: inline-block;
+
+    margin-top: 5px;
+
+    padding:
+        4px
+        9px;
+
+    border-radius: 20px;
+
+    font-size: 11px;
+
+    font-weight: 750;
+}
+
+
+.green-result small {
+
+    background: #d5f5e7;
+
+    color: #087d58;
+}
+
+
+.red-result small {
+
+    background: #ffe0e4;
+
+    color: #c83e4b;
+}
+
+
+/* =========================================================
+   CUSTOM
+========================================================= */
+
+.custom-card {
+
+    background:
+        linear-gradient(
+            145deg,
+            #f8faff,
+            #ffffff
+        );
+}
+
+
+.custom-controls {
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 12px;
+}
+
+
+.custom-controls label {
+
+    display: block;
+
+    color: var(--muted);
+
+    font-size: 11px;
+
+    font-weight: 650;
+}
+
+
+.custom-controls select {
+
+    margin-top: 7px;
+}
+
+
+.custom-result {
+
+    margin-top: 15px;
+
+    padding: 17px;
+
+    background: var(--accent-soft);
+
+    border-radius: 15px;
+
+    text-align: center;
+}
+
+
+.custom-result span {
+
+    display: block;
+
+    color: var(--muted);
+
+    font-size: 11px;
+}
+
+
+.custom-result strong {
+
+    display: inline-block;
+
+    margin-top: 3px;
+
+    color: var(--heading);
+
+    font-size: 30px;
+
+    font-weight: 850;
+}
+
+
+.custom-result small {
+
+    margin-left: 8px;
+
+    color: var(--success);
+
+    font-size: 12px;
+
+    font-weight: 750;
+}
+
+
+/* =========================================================
+   NOTE
+========================================================= */
+
+.calculator-note {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    margin-top: 25px;
+
+    padding: 14px;
+
+    background: var(--accent-soft);
+
+    border-radius: 14px;
+
+    color: #7770c9;
+
+    font-size: 11px;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   BOTTOM NAV
+========================================================= */
+
+.bottom-nav {
+
+    position: fixed;
+
+    left: 50%;
+
+    bottom: 12px;
+
+    transform: translateX(-50%);
+
+    width: min(
+        calc(100% - 24px),
+        600px
+    );
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    padding: 7px;
+
+    background:
+        rgba(255, 255, 255, 0.94);
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 12px 35px
+        rgba(25, 35, 65, 0.12);
+
+    backdrop-filter: blur(12px);
+
+    z-index: 100;
+}
+
+
+.bottom-nav a {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 3px;
+
+    min-height: 50px;
+
+    border-radius: 12px;
+
+    color: #7d8799;
+
+    text-decoration: none;
+
+    font-size: 9px;
+
+    font-weight: 650;
+}
+
+
+.bottom-nav a span {
+
+    font-size: 18px;
+}
+
+
+.bottom-nav a.active {
+
+    background: var(--accent-soft);
+
+    color: var(--accent);
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .calculator-page {
+
+        padding:
+            20px
+            16px
+            95px;
+    }
+
+
+    .content {
+
+        padding-top: 30px;
+    }
+
+
+    .page-heading h1 {
+
+        font-size: 28px;
+    }
+
+
+    .current-card {
+
+        grid-template-columns: 1fr;
+
+        gap: 20px;
+    }
+
+
+    .percentage-circle {
+
+        width: 170px;
+        height: 170px;
+    }
+
+
+    .percentage-circle::before {
+
+        width: 142px;
+        height: 142px;
+    }
+
+
+    .current-info {
+
+        width: 100%;
+    }
+
+
+    .scenario-body {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .scenario-result {
+
+        width: 100%;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 430px) {
+
+    .calculator-page {
+
+        padding:
+            18px
+            14px
+            95px;
+    }
+
+
+    .topbar {
+
+        padding-bottom: 20px;
+    }
+
+
+    .brand-icon {
+
+        width: 37px;
+        height: 37px;
+
+        border-radius: 10px;
+
+        font-size: 17px;
+    }
+
+
+    .brand-name {
+
+        font-size: 14px;
+    }
+
+
+    .student-mini strong {
+
+        font-size: 12px;
+    }
+
+
+    .student-mini small {
+
+        font-size: 9px;
+    }
+
+
+    .avatar {
+
+        width: 33px;
+        height: 33px;
+
+        font-size: 12px;
+    }
+
+
+    .content {
+
+        padding-top: 26px;
+    }
+
+
+    .page-heading {
+
+        gap: 11px;
+
+        margin-bottom: 20px;
+    }
+
+
+    .calculator-icon {
+
+        width: 42px;
+        height: 42px;
+
+        font-size: 19px;
+    }
+
+
+    .page-heading h1 {
+
+        font-size: 25px;
+
+        letter-spacing: -0.8px;
+    }
+
+
+    .page-heading p {
+
+        font-size: 12px;
+    }
+
+
+    .card {
+
+        padding: 18px;
+
+        border-radius: 18px;
+    }
+
+
+    .current-info {
+
+        grid-template-columns: 1fr 1fr;
+    }
+
+
+    .stat-box {
+
+        padding: 14px;
+    }
+
+
+    .stat-box strong {
+
+        font-size: 22px;
+    }
+
+
+    .big-result {
+
+        font-size: 28px;
+    }
+
+
+    .custom-controls {
+
+        grid-template-columns: 1fr 1fr;
+    }
+
+
+    .bottom-nav {
+
+        bottom: 9px;
+
+        width:
+            calc(100% - 18px);
+
+        border-radius: 16px;
+    }
+
+}

@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Dashboard | SCCE Attendance</title>
+
+    <link rel="stylesheet" href="../css/admin.css">
+</head>
+
+<body>
+
+<main class="admin-dashboard">
+
+    <!-- ==================================================
+         HEADER
+    =================================================== -->
+
+    <header class="admin-topbar">
+
+        <div class="admin-brand">
+
+            <div class="admin-brand-icon">
+                ✓
+            </div>
+
+            <div>
+                <div class="admin-brand-name">
+                    SCCE Attendance
+                </div>
+
+                <div class="admin-brand-subtitle">
+                    Administration
+                </div>
+            </div>
+
+        </div>
+
+        <div class="admin-actions">
+
+            <span
+                id="adminEmail"
+                class="admin-email"
+            >
+                Admin
+            </span>
+
+            <button
+                id="logoutButton"
+                class="logout-button"
+                type="button"
+            >
+                Logout
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- ==================================================
+         CONTENT
+    =================================================== -->
+
+    <section class="admin-content">
+
+        <!-- PAGE HEADING -->
+
+        <div class="dashboard-heading">
+
+            <div>
+
+                <p class="admin-eyebrow">
+                    ADMINISTRATION
+                </p>
+
+                <h1>
+                    Dashboard
+                </h1>
+
+                <p class="dashboard-description">
+                    Manage registrations, students and attendance workers.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- ==================================================
+             STATISTICS
+        =================================================== -->
+
+        <section class="stats-grid">
+
+            <article class="stat-card">
+
+                <div class="stat-label">
+                    Pending Requests
+                </div>
+
+                <div
+                    id="pendingCount"
+                    class="stat-value"
+                >
+                    0
+                </div>
+
+            </article>
+
+
+            <article class="stat-card">
+
+                <div class="stat-label">
+                    Active Students
+                </div>
+
+                <div
+                    id="studentCount"
+                    class="stat-value"
+                >
+                    0
+                </div>
+
+            </article>
+
+
+            <article class="stat-card">
+
+                <div class="stat-label">
+                    Today's Jobs
+                </div>
+
+                <div
+                    id="jobCount"
+                    class="stat-value"
+                >
+                    0
+                </div>
+
+            </article>
+
+
+            <article class="stat-card">
+
+                <div class="stat-label">
+                    Running Jobs
+                </div>
+
+                <div
+                    id="runningJobCount"
+                    class="stat-value"
+                >
+                    0
+                </div>
+
+            </article>
+
+
+            <article class="stat-card">
+
+                <div class="stat-label">
+                    Failed Jobs
+                </div>
+
+                <div
+                    id="failedJobCount"
+                    class="stat-value"
+                >
+                    0
+                </div>
+
+            </article>
+
+
+            <article class="stat-card">
+
+                <div class="stat-label">
+                    Pending Jobs
+                </div>
+
+                <div
+                    id="pendingJobCount"
+                    class="stat-value"
+                >
+                    0
+                </div>
+
+            </article>
+
+        </section>
+
+
+        <!-- ==================================================
+             WORKER STATUS
+        =================================================== -->
+
+        <section class="admin-section">
+
+            <div class="section-header">
+
+                <div>
+
+                    <p class="admin-eyebrow">
+                        WORKER
+                    </p>
+
+                    <h2>
+                        Worker activity
+                    </h2>
+
+                </div>
+
+                <button
+                    id="refreshWorker"
+                    class="secondary-button"
+                    type="button"
+                >
+                    ↻ Refresh
+                </button>
+
+            </div>
+
+
+            <div
+                id="workerContainer"
+                class="jobs-container"
+            >
+
+                <div class="admin-loading">
+                    Checking worker activity...
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==================================================
+             REGISTRATION REQUESTS
+        =================================================== -->
+
+        <section class="admin-section">
+
+            <div class="section-header">
+
+                <div>
+
+                    <p class="admin-eyebrow">
+                        REGISTRATION
+                    </p>
+
+                    <h2>
+                        Pending requests
+                    </h2>
+
+                </div>
+
+                <button
+                    id="refreshRequests"
+                    class="secondary-button"
+                    type="button"
+                >
+                    ↻ Refresh
+                </button>
+
+            </div>
+
+
+            <div
+                id="requestsContainer"
+                class="requests-container"
+            >
+
+                <div class="admin-loading">
+                    Loading requests...
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==================================================
+             STUDENTS
+        =================================================== -->
+
+        <section class="admin-section">
+
+            <div class="section-header">
+
+                <div>
+
+                    <p class="admin-eyebrow">
+                        STUDENTS
+                    </p>
+
+                    <h2>
+                        Registered students
+                    </h2>
+
+                </div>
+
+                <button
+                    id="refreshStudents"
+                    class="secondary-button"
+                    type="button"
+                >
+                    ↻ Refresh
+                </button>
+
+            </div>
+
+
+            <div
+                id="studentsContainer"
+                class="students-container"
+            >
+
+                <div class="admin-loading">
+                    Loading students...
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==================================================
+             JOB QUEUE
+        =================================================== -->
+
+        <section class="admin-section">
+
+            <div class="section-header">
+
+                <div>
+
+                    <p class="admin-eyebrow">
+                        JOB QUEUE
+                    </p>
+
+                    <h2>
+                        Attendance jobs
+                    </h2>
+
+                    <p class="section-description">
+                        Monitor queued, running, completed and failed attendance jobs.
+                    </p>
+
+                </div>
+
+                <button
+                    id="refreshJobs"
+                    class="secondary-button"
+                    type="button"
+                >
+                    ↻ Refresh
+                </button>
+
+            </div>
+
+
+            <div
+                id="jobsContainer"
+                class="jobs-container"
+            >
+
+                <div class="admin-loading">
+                    Loading jobs...
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==================================================
+             JOB DETAILS
+        =================================================== -->
+
+        <section
+            id="jobDetailsSection"
+            class="admin-section job-details-section"
+            hidden
+        >
+
+            <div class="section-header">
+
+                <div>
+
+                    <p class="admin-eyebrow">
+                        JOB DETAILS
+                    </p>
+
+                    <h2>
+                        Attendance sync
+                    </h2>
+
+                </div>
+
+                <button
+                    id="closeJobDetails"
+                    class="secondary-button"
+                    type="button"
+                >
+                    Close
+                </button>
+
+            </div>
+
+
+            <div
+                id="jobDetailsContainer"
+                class="job-details-container"
+            >
+
+                <!-- Filled by JavaScript -->
+
+            </div>
+
+        </section>
+
+    </section>
+
+
+    <!-- ==================================================
+         FOOTER
+    =================================================== -->
+
+    <footer class="admin-footer-full">
+        SCCE Student Attendance Administration
+    </footer>
+
+</main>
+
+
+<script
+    type="module"
+    src="../js/admin-dashboard.js"
+></script>
+
+</body>
+</html>

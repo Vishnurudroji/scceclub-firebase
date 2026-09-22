@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Registration Pending | SCCE Attendance</title>
+
+    <link rel="stylesheet" href="css/pending.css">
+</head>
+
+<body>
+
+<main class="pending-page">
+
+    <!-- =========================
+         TOP BAR
+    ========================== -->
+
+    <header class="pending-topbar">
+
+        <a
+            href="index.html"
+            class="pending-brand"
+        >
+
+            <div class="pending-brand-icon">
+                ✓
+            </div>
+
+            <div class="pending-brand-text">
+
+                <strong>
+                    SCCE Attendance
+                </strong>
+
+                <span>
+                    Student Portal
+                </span>
+
+            </div>
+
+        </a>
+
+
+        <div class="pending-status">
+
+            <span class="status-dot"></span>
+
+            Request received
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================
+         MAIN
+    ========================== -->
+
+    <section class="pending-content">
+
+
+        <!-- Decorative elements -->
+
+        <div class="floating-shape shape-one">
+            ✦
+        </div>
+
+        <div class="floating-shape shape-two">
+            +
+        </div>
+
+
+        <!-- =========================
+             ICON
+        ========================== -->
+
+        <div class="pending-icon-wrap">
+
+            <div class="pending-icon">
+                ⏳
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             BADGE
+        ========================== -->
+
+        <div class="pending-badge">
+
+            <span></span>
+
+            Registration Pending
+
+        </div>
+
+
+        <!-- =========================
+             TITLE
+        ========================== -->
+
+        <h1>
+            Almost
+            <span>there.</span>
+        </h1>
+
+
+        <p class="pending-description">
+
+            Your registration request has been received.
+            We're waiting for admin approval before
+            activating your attendance dashboard.
+
+        </p>
+
+
+        <!-- =========================
+             WAITING CARD
+        ========================== -->
+
+        <div class="waiting-card">
+
+            <div class="waiting-icon">
+                🕐
+            </div>
+
+
+            <div class="waiting-content">
+
+                <strong>
+                    Please wait up to 24 hours
+                </strong>
+
+                <p>
+                    Once approved, come back and enter
+                    your hall ticket number to access
+                    your attendance.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             PROCESS
+        ========================== -->
+
+        <div class="process-card">
+
+            <div class="process-title">
+                Registration progress
+            </div>
+
+
+            <div class="process-steps">
+
+
+                <!-- STEP 1 -->
+
+                <div class="process-step completed">
+
+                    <div class="step-circle">
+                        ✓
+                    </div>
+
+                    <div class="step-info">
+
+                        <strong>
+                            Request submitted
+                        </strong>
+
+                        <span>
+                            We've received your request
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="step-line completed-line"></div>
+
+
+                <!-- STEP 2 -->
+
+                <div class="process-step current">
+
+                    <div class="step-circle">
+                        2
+                    </div>
+
+                    <div class="step-info">
+
+                        <strong>
+                            Admin review
+                        </strong>
+
+                        <span>
+                            Your request is being reviewed
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="step-line"></div>
+
+
+                <!-- STEP 3 -->
+
+                <div class="process-step">
+
+                    <div class="step-circle">
+                        3
+                    </div>
+
+                    <div class="step-info">
+
+                        <strong>
+                            Attendance access
+                        </strong>
+
+                        <span>
+                            Your dashboard becomes available
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             BUTTON
+        ========================== -->
+
+        <button
+            type="button"
+            id="backButton"
+            class="back-button"
+        >
+
+            <span>
+                ←
+            </span>
+
+            <span>
+                Back to Portal
+            </span>
+
+        </button>
+
+
+        <!-- =========================
+             SMALL NOTE
+        ========================== -->
+
+        <div class="pending-note">
+
+            <span>🔒</span>
+
+            <span>
+                Your registration details are kept private.
+            </span>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer class="pending-footer">
+
+        <span>
+            SCCE Attendance
+        </span>
+
+        <span>
+            Student Portal
+        </span>
+
+    </footer>
+
+</main>
+
+
+<script>
+
+    document
+        .getElementById("backButton")
+        .addEventListener("click", () => {
+
+            window.location.href =
+                "index.html";
+
+        });
+
+</script>
+
+</body>
+</html>

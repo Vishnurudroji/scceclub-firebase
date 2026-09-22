@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Login | SCCE Attendance</title>
+
+    <link rel="stylesheet" href="../css/admin-login.css">
+</head>
+
+<body>
+
+    <main class="admin-page">
+
+        <section class="admin-login-card">
+
+            <div class="admin-brand">
+                <div class="admin-brand-icon">✓</div>
+
+                <div>
+                    <div class="admin-brand-name">
+                        SCCE Attendance
+                    </div>
+
+                    <div class="admin-brand-subtitle">
+                        Administration
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="admin-login-content">
+
+                <div class="admin-badge">
+                    Admin Portal
+                </div>
+
+                <h1>
+                    Welcome<br>
+                    <span>back.</span>
+                </h1>
+
+                <p class="admin-description">
+                    Sign in to manage students and attendance.
+                </p>
+
+
+                <form id="adminLoginForm">
+
+                    <div class="field">
+
+                        <label for="email">
+                            Email
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            placeholder="admin@example.com"
+                            autocomplete="email"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label for="password">
+                            Password
+                        </label>
+
+                        <input
+                            type="password"
+                            id="password"
+                            placeholder="Enter your password"
+                            autocomplete="current-password"
+                            required
+                        >
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        id="loginButton"
+                    >
+                        <span>Sign in</span>
+                        <span>→</span>
+                    </button>
+
+                </form>
+
+
+                <p
+                    id="loginError"
+                    class="login-error"
+                ></p>
+
+            </div>
+
+
+            <div class="admin-footer">
+                SCCE Attendance Administration
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script
+        type="module"
+        src="../js/admin.js"
+    ></script>
+
+</body>
+</html>
