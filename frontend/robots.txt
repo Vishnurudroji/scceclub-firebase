@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://scce-club.web.app/sitemap.xml

@@ -48,6 +48,15 @@
 
     --orange: #c48727;
     --orange-soft: #fff4dc;
+
+    /* Motion */
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
 }
 
 
@@ -58,6 +67,7 @@
 body {
 
     min-height: 100vh;
+    min-height: 100dvh;
 
     background:
         radial-gradient(
@@ -74,6 +84,8 @@ body {
 
         var(--bg);
 
+    background-attachment: fixed;
+
     color: var(--text);
 
     font-family:
@@ -86,6 +98,7 @@ body {
         sans-serif;
 
     -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: transparent;
 
     overflow-x: hidden;
 }
@@ -93,6 +106,14 @@ body {
 
 button {
     font: inherit;
+}
+
+
+/* Visible keyboard focus */
+
+:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
 }
 
 
@@ -105,7 +126,7 @@ button {
     position: fixed;
 
     left: 50%;
-    bottom: 18px;
+    bottom: calc(18px + env(safe-area-inset-bottom, 0px));
 
     transform: translateX(-50%);
 
@@ -128,6 +149,7 @@ button {
 
     z-index: 1000;
 
+    -webkit-backdrop-filter: blur(12px);
     backdrop-filter: blur(12px);
 }
 
@@ -139,6 +161,7 @@ button {
 .nav-item {
 
     min-width: 120px;
+    min-height: 44px;
 
     display: flex;
     align-items: center;
@@ -158,16 +181,12 @@ button {
     font-weight: 700;
 
     transition:
-        background 0.2s ease,
-        color 0.2s ease,
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
+        background 0.25s var(--ease),
+        color 0.25s var(--ease),
+        transform 0.25s var(--ease),
+        box-shadow 0.25s var(--ease);
 }
 
-
-/* =========================================================
-   NAV ICON
-========================================================= */
 
 .nav-icon {
 
@@ -175,23 +194,14 @@ button {
 
     line-height: 1;
 
-    transition:
-        transform 0.2s ease;
+    transition: transform 0.25s var(--ease);
 }
 
-
-/* =========================================================
-   NAV LABEL
-========================================================= */
 
 .nav-label {
     line-height: 1;
 }
 
-
-/* =========================================================
-   NAV HOVER
-========================================================= */
 
 .nav-item:hover {
 
@@ -202,14 +212,9 @@ button {
 
 
 .nav-item:hover .nav-icon {
-
     transform: scale(1.08);
 }
 
-
-/* =========================================================
-   ACTIVE NAV
-========================================================= */
 
 .nav-item.active {
 
@@ -217,23 +222,16 @@ button {
 
     color: var(--accent);
 
-    box-shadow:
-        inset 0 0 0 1px rgba(104, 87, 232, 0.04);
+    box-shadow: inset 0 0 0 1px rgba(104, 87, 232, 0.04);
 }
 
 
 .nav-item.active .nav-icon {
-
     transform: scale(1.08);
 }
 
 
-/* =========================================================
-   PRESS EFFECT
-========================================================= */
-
 .nav-item:active {
-
     transform: scale(0.96);
 }
 
@@ -249,13 +247,15 @@ button {
     max-width: 1050px;
 
     min-height: 100vh;
+    min-height: 100dvh;
 
     margin: 0 auto;
 
+    /* Extra bottom space so the floating nav never covers content */
     padding:
         28px
         24px
-        20px;
+        calc(110px + env(safe-area-inset-bottom, 0px));
 }
 
 
@@ -271,16 +271,13 @@ button {
 
     justify-content: space-between;
 
+    gap: 12px;
+
     padding-bottom: 25px;
 
-    border-bottom:
-        1px solid var(--border);
+    border-bottom: 1px solid var(--border);
 }
 
-
-/* =========================================================
-   BRAND
-========================================================= */
 
 .brand {
 
@@ -289,14 +286,14 @@ button {
     align-items: center;
 
     gap: 12px;
+
+    min-width: 0;
 }
 
 
-/* =========================================================
-   SCCE BRAND ICON
-========================================================= */
-
 .brand-icon {
+
+    flex-shrink: 0;
 
     width: 42px;
     height: 42px;
@@ -320,9 +317,7 @@ button {
 
     font-weight: 900;
 
-    box-shadow:
-        0 8px 20px
-        rgba(104, 87, 232, 0.22);
+    box-shadow: 0 8px 20px rgba(104, 87, 232, 0.22);
 
     position: relative;
 
@@ -346,25 +341,9 @@ button {
 
     border-radius: 50%;
 
-    background:
-        rgba(255, 255, 255, 0.20);
+    background: rgba(255, 255, 255, 0.20);
 }
 
-
-.brand-icon span {
-
-    position: relative;
-
-    z-index: 1;
-
-    transform:
-        translateY(-1px);
-}
-
-
-/* =========================================================
-   BRAND TEXT
-========================================================= */
 
 .brand-name {
 
@@ -373,6 +352,8 @@ button {
     font-size: 15px;
 
     font-weight: 750;
+
+    white-space: nowrap;
 }
 
 
@@ -392,16 +373,17 @@ button {
 
 .logout-button {
 
-    border:
-        1px solid #e2e5ec;
+    flex-shrink: 0;
+
+    min-height: 38px;
+
+    border: 1px solid #e2e5ec;
 
     background: #ffffff;
 
     color: #687286;
 
-    padding:
-        9px
-        15px;
+    padding: 9px 15px;
 
     border-radius: 10px;
 
@@ -412,10 +394,10 @@ button {
     cursor: pointer;
 
     transition:
-        background 0.2s ease,
-        color 0.2s ease,
-        border-color 0.2s ease,
-        transform 0.15s ease;
+        background 0.25s var(--ease),
+        color 0.25s var(--ease),
+        border-color 0.25s var(--ease),
+        transform 0.15s var(--ease);
 }
 
 
@@ -430,7 +412,6 @@ button {
 
 
 .logout-button:active {
-
     transform: scale(0.97);
 }
 
@@ -440,8 +421,37 @@ button {
 ========================================================= */
 
 .content {
-
     padding-top: 48px;
+}
+
+
+/* One gentle page-load reveal */
+
+.welcome-section,
+.overview-grid,
+.updated-card,
+.history-section,
+.empty-state {
+    animation: studentReveal 0.55s var(--ease) both;
+}
+
+.overview-grid  { animation-delay: 0.06s; }
+.updated-card   { animation-delay: 0.12s; }
+.history-section,
+.empty-state    { animation-delay: 0.18s; }
+
+
+@keyframes studentReveal {
+
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+    }
 }
 
 
@@ -450,7 +460,6 @@ button {
 ========================================================= */
 
 .welcome-section {
-
     margin-bottom: 32px;
 }
 
@@ -473,23 +482,19 @@ button {
 
     color: var(--heading);
 
-    font-size:
-        clamp(
-            32px,
-            5vw,
-            46px
-        );
+    font-size: clamp(32px, 5vw, 46px);
 
     line-height: 1.05;
 
     letter-spacing: -1.8px;
 
     font-weight: 850;
+
+    overflow-wrap: anywhere;
 }
 
 
 .welcome-section h1 span {
-
     color: var(--accent);
 }
 
@@ -512,9 +517,7 @@ button {
 
     display: grid;
 
-    grid-template-columns:
-        1.15fr
-        1fr;
+    grid-template-columns: 1.15fr 1fr;
 
     gap: 16px;
 }
@@ -528,19 +531,11 @@ button {
 
     background: var(--surface);
 
-    border:
-        1px solid var(--border);
+    border: 1px solid var(--border);
 
     border-radius: 22px;
 
-    box-shadow:
-        0 10px 30px
-        rgba(
-            25,
-            35,
-            65,
-            0.035
-        );
+    box-shadow: 0 10px 30px rgba(25, 35, 65, 0.035);
 }
 
 
@@ -557,17 +552,9 @@ button {
             #ffffff 65%
         );
 
-    border-color:
-        #e4dfff;
+    border-color: #e4dfff;
 
-    box-shadow:
-        0 12px 35px
-        rgba(
-            104,
-            87,
-            232,
-            0.07
-        );
+    box-shadow: 0 12px 35px rgba(104, 87, 232, 0.07);
 }
 
 
@@ -598,6 +585,8 @@ button {
     letter-spacing: -3px;
 
     font-weight: 850;
+
+    font-variant-numeric: tabular-nums;
 }
 
 
@@ -620,16 +609,111 @@ button {
     color: #8c94a5;
 
     font-size: 13px;
+
+    font-variant-numeric: tabular-nums;
 }
 
 
 .dot {
 
-    margin:
-        0
-        7px;
+    margin: 0 7px;
 
     color: #c4c8d1;
+}
+
+
+/* =========================================================
+   OVERALL PROGRESS BAR
+========================================================= */
+
+.progress-track {
+
+    position: relative;
+
+    height: 8px;
+
+    margin-top: 20px;
+
+    border-radius: 999px;
+
+    background: #e4dfff;
+
+    overflow: visible;
+}
+
+
+.progress-fill {
+
+    height: 100%;
+
+    width: 0;
+
+    border-radius: inherit;
+
+    background: var(--accent);
+
+    transition:
+        width 0.9s var(--ease),
+        background 0.3s ease;
+}
+
+
+.progress-fill.present {
+    background: var(--success);
+}
+
+
+.progress-fill.absent {
+    background: var(--danger);
+}
+
+
+/* 75% marker */
+
+.progress-threshold {
+
+    position: absolute;
+
+    left: 75%;
+    top: -3px;
+
+    width: 2px;
+    height: 14px;
+
+    border-radius: 2px;
+
+    background: #c4c8d1;
+
+    transform: translateX(-1px);
+}
+
+
+.progress-note {
+
+    margin-top: 10px;
+
+    color: #8c94a5;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    transition: color 0.3s ease;
+}
+
+
+.progress-note.present {
+    color: var(--success);
+}
+
+
+.progress-note.absent {
+    color: var(--danger);
+}
+
+
+.primary-card .attendance-meta {
+    margin-top: 6px;
 }
 
 
@@ -648,23 +732,22 @@ button {
     font-weight: 800;
 
     letter-spacing: -0.8px;
+
+    transition: color 0.3s ease;
 }
 
 
 .today-status.present {
-
     color: var(--success);
 }
 
 
 .today-status.absent {
-
     color: var(--danger);
 }
 
 
 .today-status.not-available {
-
     color: #8b93a3;
 }
 
@@ -695,29 +778,21 @@ button {
 
     gap: 13px;
 
-    padding:
-        16px
-        20px;
+    padding: 16px 20px;
 
     background: #ffffff;
 
-    border:
-        1px solid var(--border);
+    border: 1px solid var(--border);
 
     border-radius: 16px;
 
-    box-shadow:
-        0 8px 25px
-        rgba(
-            25,
-            35,
-            65,
-            0.025
-        );
+    box-shadow: 0 8px 25px rgba(25, 35, 65, 0.025);
 }
 
 
 .updated-icon {
+
+    flex-shrink: 0;
 
     width: 34px;
     height: 34px;
@@ -735,6 +810,14 @@ button {
     color: var(--accent);
 
     font-size: 16px;
+}
+
+
+.updated-information {
+
+    flex: 1;
+
+    min-width: 0;
 }
 
 
@@ -756,18 +839,103 @@ button {
 }
 
 
+.update-action {
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   UPDATE ATTENDANCE BUTTON
+========================================================= */
+
+.update-attendance-button {
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    min-height: 44px;
+    padding: 12px 20px;
+
+    border: none;
+    border-radius: 10px;
+
+    background: var(--accent);
+    color: #ffffff;
+
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1;
+
+    white-space: nowrap;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.25s var(--ease),
+        opacity 0.25s ease,
+        box-shadow 0.25s var(--ease),
+        background 0.25s ease;
+}
+
+
+.update-button-icon {
+
+    display: inline-block;
+
+    line-height: 1;
+
+    transition: transform 0.4s var(--ease);
+}
+
+
+.update-attendance-button:hover {
+
+    transform: translateY(-1px);
+
+    box-shadow: 0 6px 18px rgba(104, 87, 232, 0.25);
+}
+
+
+.update-attendance-button:hover .update-button-icon {
+    transform: rotate(90deg);
+}
+
+
+.update-attendance-button:active {
+    transform: scale(0.97);
+}
+
+
+.update-attendance-button:disabled {
+
+    opacity: 0.7;
+
+    cursor: not-allowed;
+
+    transform: none;
+
+    box-shadow: none;
+}
+
+
+.update-attendance-button.is-loading .update-button-icon {
+    animation: studentSpin 0.9s linear infinite;
+}
+
+
 /* =========================================================
    HISTORY
 ========================================================= */
 
 .history-section {
-
     margin-top: 48px;
 }
 
 
 .section-heading {
-
     margin-bottom: 18px;
 }
 
@@ -806,22 +974,24 @@ button {
 
     justify-content: space-between;
 
-    padding:
-        17px
-        20px;
+    gap: 12px;
+
+    padding: 17px 20px;
 
     background: #ffffff;
 
-    border:
-        1px solid var(--border);
+    border: 1px solid var(--border);
 
     border-radius: 15px;
 
+    animation: studentReveal 0.4s var(--ease) both;
+    animation-delay: calc(var(--i, 0) * 30ms);
+
     transition:
-        background 0.2s ease,
-        border-color 0.2s ease,
-        transform 0.15s ease,
-        box-shadow 0.2s ease;
+        background 0.25s var(--ease),
+        border-color 0.25s var(--ease),
+        transform 0.25s var(--ease),
+        box-shadow 0.25s var(--ease);
 }
 
 
@@ -833,20 +1003,9 @@ button {
 
     transform: translateY(-1px);
 
-    box-shadow:
-        0 8px 22px
-        rgba(
-            25,
-            35,
-            65,
-            0.04
-        );
+    box-shadow: 0 8px 22px rgba(25, 35, 65, 0.04);
 }
 
-
-/* =========================================================
-   HISTORY DATE
-========================================================= */
 
 .history-date {
 
@@ -868,27 +1027,30 @@ button {
 }
 
 
-/* =========================================================
-   HISTORY PERCENTAGE
-========================================================= */
-
 .history-percentage {
+
+    flex-shrink: 0;
 
     font-size: 15px;
 
     font-weight: 750;
+
+    font-variant-numeric: tabular-nums;
 }
 
 
 .history-percentage.present {
-
     color: var(--success);
 }
 
 
 .history-percentage.absent {
-
     color: var(--danger);
+}
+
+
+.history-percentage.not-available {
+    color: #8b93a3;
 }
 
 
@@ -900,32 +1062,21 @@ button {
 
     margin-top: 48px;
 
-    padding:
-        55px
-        25px;
+    padding: 55px 25px;
 
     text-align: center;
 
     background: #ffffff;
 
-    border:
-        1px solid var(--border);
+    border: 1px solid var(--border);
 
     border-radius: 22px;
 
-    box-shadow:
-        0 10px 30px
-        rgba(
-            25,
-            35,
-            65,
-            0.035
-        );
+    box-shadow: 0 10px 30px rgba(25, 35, 65, 0.035);
 }
 
 
 .empty-state.hidden {
-
     display: none !important;
 }
 
@@ -935,10 +1086,7 @@ button {
     width: 54px;
     height: 54px;
 
-    margin:
-        0
-        auto
-        18px;
+    margin: 0 auto 18px;
 
     display: flex;
 
@@ -970,10 +1118,7 @@ button {
 
     max-width: 380px;
 
-    margin:
-        10px
-        auto
-        0;
+    margin: 10px auto 0;
 
     color: #929aaa;
 
@@ -983,12 +1128,19 @@ button {
 }
 
 
+.empty-state p strong {
+
+    color: var(--accent);
+
+    font-weight: 700;
+}
+
+
 /* =========================================================
    HIDDEN
 ========================================================= */
 
 .hidden {
-
     display: none !important;
 }
 
@@ -1006,6 +1158,8 @@ button {
     color: #929aaa;
 
     font-size: 13px;
+
+    line-height: 1.5;
 }
 
 
@@ -1022,28 +1176,72 @@ button {
 
     vertical-align: -3px;
 
-    border:
-        2px solid #e9e9f0;
+    border: 2px solid #e9e9f0;
 
-    border-top-color:
-        var(--accent);
+    border-top-color: var(--accent);
 
     border-radius: 50%;
 
-    animation:
-        studentSpin 0.8s linear infinite;
+    animation: studentSpin 0.8s linear infinite;
+}
+
+
+/* Error variant: no spinner */
+
+.loading.error {
+    color: var(--danger);
+}
+
+.loading.error::before {
+    display: none;
+}
+
+
+.retry-button {
+
+    display: block;
+
+    min-height: 40px;
+
+    margin: 0 auto;
+
+    padding: 10px 18px;
+
+    border: 1px solid #ddd8fa;
+
+    border-radius: 10px;
+
+    background: var(--accent-soft);
+
+    color: var(--accent);
+
+    font-size: 13px;
+
+    font-weight: 650;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.15s var(--ease),
+        background 0.25s ease;
+}
+
+
+.retry-button:hover {
+    background: #e8e3ff;
+}
+
+
+.retry-button:active {
+    transform: scale(0.97);
 }
 
 
 @keyframes studentSpin {
 
     to {
-
-        transform:
-            rotate(360deg);
-
+        transform: rotate(360deg);
     }
-
 }
 
 
@@ -1057,14 +1255,318 @@ footer {
 
     padding-top: 20px;
 
-    border-top:
-        1px solid var(--border);
+    border-top: 1px solid var(--border);
 
     color: #a1a8b6;
 
     text-align: center;
 
     font-size: 11px;
+}
+
+
+/* =========================================================
+   ATTENDANCE UPDATE OVERLAY
+========================================================= */
+
+.attendance-update-overlay {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 2000;
+
+    display: grid;
+
+    place-items: center;
+
+    padding: 20px;
+
+    background: rgba(23, 32, 51, 0.38);
+
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transition:
+        opacity 0.3s var(--ease),
+        visibility 0s linear 0.3s;
+}
+
+
+.attendance-update-overlay.active {
+
+    opacity: 1;
+
+    visibility: visible;
+
+    transition-delay: 0s;
+}
+
+
+.attendance-update-modal {
+
+    width: min(100%, 340px);
+
+    padding: 32px 26px 26px;
+
+    text-align: center;
+
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+
+    border-radius: 22px;
+
+    box-shadow:
+        0 24px 60px rgba(25, 35, 65, 0.22),
+        0 4px 14px rgba(25, 35, 65, 0.06);
+
+    transform: translateY(14px) scale(0.97);
+
+    transition: transform 0.4s var(--ease);
+}
+
+
+.attendance-update-overlay.active .attendance-update-modal {
+    transform: none;
+}
+
+
+.attendance-update-modal h2 {
+
+    margin-top: 22px;
+
+    color: var(--heading);
+
+    font-size: 20px;
+
+    letter-spacing: -0.5px;
+
+    font-weight: 800;
+}
+
+
+.attendance-update-modal p {
+
+    margin-top: 8px;
+
+    color: var(--muted);
+
+    font-size: 14px;
+
+    line-height: 1.55;
+}
+
+
+/* Loader */
+
+.update-loader {
+
+    position: relative;
+
+    width: 68px;
+    height: 68px;
+
+    margin: 0 auto;
+}
+
+
+.loader-ring {
+
+    position: absolute;
+
+    inset: 0;
+
+    border: 4px solid var(--accent-soft);
+
+    border-top-color: var(--accent);
+
+    border-radius: 50%;
+
+    animation: studentSpin 0.9s linear infinite;
+
+    transition:
+        border-color 0.3s ease,
+        background 0.3s ease;
+}
+
+
+.loader-check {
+
+    position: absolute;
+
+    inset: 0;
+
+    display: grid;
+
+    place-items: center;
+
+    color: var(--accent);
+
+    font-size: 24px;
+
+    font-weight: 900;
+
+    transition: color 0.3s ease;
+}
+
+
+/* Progress bar */
+
+.update-progress {
+
+    height: 6px;
+
+    margin-top: 22px;
+
+    border-radius: 999px;
+
+    background: var(--accent-soft);
+
+    overflow: hidden;
+}
+
+
+.update-progress-bar {
+
+    width: 40%;
+
+    height: 100%;
+
+    border-radius: inherit;
+
+    background: var(--accent);
+
+    animation: updateProgress 1.3s var(--ease) infinite;
+}
+
+
+@keyframes updateProgress {
+
+    from {
+        transform: translateX(-100%);
+    }
+
+    to {
+        transform: translateX(250%);
+    }
+}
+
+
+.attendance-update-modal .update-warning {
+
+    margin-top: 16px;
+
+    color: var(--muted-2);
+
+    font-size: 12px;
+}
+
+
+/* Dismiss button (errors only) */
+
+.update-dismiss-button {
+
+    display: none;
+
+    width: 100%;
+
+    min-height: 44px;
+
+    margin-top: 18px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: var(--accent);
+
+    color: #ffffff;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.15s var(--ease),
+        box-shadow 0.25s var(--ease);
+}
+
+
+.update-dismiss-button:hover {
+    box-shadow: 0 6px 18px rgba(104, 87, 232, 0.25);
+}
+
+
+.update-dismiss-button:active {
+    transform: scale(0.97);
+}
+
+
+/* ---------- Success state ---------- */
+
+.attendance-update-modal.is-success .loader-ring {
+
+    animation: none;
+
+    border-color: var(--success);
+
+    background: var(--success-soft);
+}
+
+
+.attendance-update-modal.is-success .loader-check {
+    color: var(--success);
+}
+
+
+.attendance-update-modal.is-success .update-progress-bar {
+
+    width: 100%;
+
+    animation: none;
+
+    background: var(--success);
+}
+
+
+.attendance-update-modal.is-success .update-warning {
+    display: none;
+}
+
+
+/* ---------- Error state ---------- */
+
+.attendance-update-modal.is-error .loader-ring {
+
+    animation: none;
+
+    border-color: var(--danger);
+
+    background: var(--danger-soft);
+}
+
+
+.attendance-update-modal.is-error .loader-check {
+    color: var(--danger);
+}
+
+
+.attendance-update-modal.is-error .update-progress,
+.attendance-update-modal.is-error .update-warning {
+    display: none;
+}
+
+
+.attendance-update-modal.is-error .update-dismiss-button {
+    display: block;
 }
 
 
@@ -1078,18 +1580,17 @@ footer {
 
         padding:
             20px
-            16px;
+            16px
+            calc(110px + env(safe-area-inset-bottom, 0px));
     }
 
 
     .content {
-
         padding-top: 36px;
     }
 
 
     .overview-grid {
-
         grid-template-columns: 1fr;
     }
 
@@ -1103,16 +1604,36 @@ footer {
 
 
     .attendance-value {
-
         font-size: 54px;
     }
 
 
     .today-status {
-
         margin-top: 25px;
     }
+}
 
+
+/* Update card: stack the button below the info on narrow screens */
+
+@media (max-width: 560px) {
+
+    .updated-card {
+        flex-wrap: wrap;
+    }
+
+
+    .update-action {
+
+        width: 100%;
+
+        flex-basis: 100%;
+    }
+
+
+    .update-attendance-button {
+        width: 100%;
+    }
 }
 
 
@@ -1126,18 +1647,17 @@ footer {
 
         padding:
             18px
-            14px;
+            14px
+            calc(104px + env(safe-area-inset-bottom, 0px));
     }
 
 
     .topbar {
-
         padding-bottom: 24px;
     }
 
 
     .brand {
-
         gap: 9px;
     }
 
@@ -1154,35 +1674,29 @@ footer {
 
 
     .brand-name {
-
         font-size: 14px;
     }
 
 
     .brand-subtitle {
-
         font-size: 10px;
     }
 
 
     .logout-button {
 
-        padding:
-            8px
-            12px;
+        padding: 8px 12px;
 
         font-size: 11px;
     }
 
 
     .content {
-
         padding-top: 30px;
     }
 
 
     .welcome-section {
-
         margin-bottom: 25px;
     }
 
@@ -1196,7 +1710,6 @@ footer {
 
 
     .welcome-text {
-
         font-size: 13px;
     }
 
@@ -1220,59 +1733,46 @@ footer {
 
 
     .attendance-meta {
-
         font-size: 12px;
     }
 
 
     .today-status {
-
         font-size: 24px;
     }
 
 
     .updated-card {
-
-        padding:
-            14px
-            16px;
+        padding: 14px 16px;
     }
 
 
     .history-section {
-
         margin-top: 38px;
     }
 
 
     .section-heading h2 {
-
         font-size: 22px;
     }
 
 
     .history-item {
-
-        padding:
-            15px
-            16px;
+        padding: 15px 16px;
     }
 
 
     .history-date {
-
         font-size: 13px;
     }
 
 
     .history-subtitle {
-
         font-size: 11px;
     }
 
 
     .history-percentage {
-
         font-size: 14px;
     }
 
@@ -1281,17 +1781,13 @@ footer {
 
         margin-top: 35px;
 
-        padding:
-            45px
-            20px;
+        padding: 45px 20px;
     }
 
 
     footer {
-
         margin-top: 50px;
     }
-
 }
 
 
@@ -1302,35 +1798,29 @@ footer {
 @media (max-width: 350px) {
 
     .brand-subtitle {
-
         display: none;
     }
 
 
     .brand-name {
-
         font-size: 13px;
     }
 
 
     .logout-button {
 
-        padding:
-            7px
-            10px;
+        padding: 7px 10px;
 
         font-size: 10px;
     }
 
 
     .welcome-section h1 {
-
         font-size: 31px;
     }
 
 
     .attendance-value {
-
         font-size: 47px;
     }
 
@@ -1339,7 +1829,7 @@ footer {
 
         width: calc(100% - 20px);
 
-        bottom: 10px;
+        bottom: calc(10px + env(safe-area-inset-bottom, 0px));
     }
 
 
@@ -1347,17 +1837,44 @@ footer {
 
         min-width: 0;
 
-        padding:
-            10px
-            6px;
+        flex: 1;
+
+        padding: 10px 6px;
 
         font-size: 11px;
     }
 
 
     .nav-icon {
-
         font-size: 16px;
     }
+}
 
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .loader-ring,
+    .update-attendance-button.is-loading .update-button-icon,
+    .loading::before {
+
+        animation-duration: 1.6s !important;
+        animation-iteration-count: infinite !important;
+    }
 }

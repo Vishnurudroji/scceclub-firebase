@@ -3,7 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#f7f9ff">
 
     <title>My Attendance | SCCE</title>
 
@@ -12,94 +13,125 @@
     <link rel="stylesheet" href="css/student.css">
 </head>
 
+
 <body>
 
     <main class="dashboard">
-        <!-- Student Navigation -->
+
+        <!-- =====================================================
+             STUDENT NAVIGATION
+        ====================================================== -->
+
         <nav class="student-nav" aria-label="Student navigation">
 
             <a href="student.html" class="nav-item active" aria-current="page">
-                <span class="nav-icon">🏡</span>
+                <span class="nav-icon" aria-hidden="true">🏡</span>
                 <span class="nav-label">Dashboard</span>
             </a>
 
             <a href="calculator.html" class="nav-item">
-                <span class="nav-icon">📊</span>
+                <span class="nav-icon" aria-hidden="true">📊</span>
                 <span class="nav-label">Calculator</span>
             </a>
 
         </nav>
-        <!-- Header -->
+
+
+        <!-- =====================================================
+             HEADER
+        ====================================================== -->
+
         <header class="topbar">
 
             <div class="brand">
-                <div class="brand-icon">✓</div>
+
+                <div class="brand-icon" aria-hidden="true">✓</div>
 
                 <div>
                     <div class="brand-name">SCCE Attendance</div>
                     <div class="brand-subtitle">Student Portal</div>
                 </div>
+
             </div>
 
             <button id="logoutButton" class="logout-button" type="button">
-                Exit
+                Log out
             </button>
 
         </header>
 
 
-        <!-- Main content -->
+        <!-- =====================================================
+             MAIN CONTENT
+        ====================================================== -->
+
         <section class="content">
+
+            <!-- WELCOME -->
 
             <div class="welcome-section">
 
-                <div>
-                    <p class="eyebrow">YOUR ATTENDANCE</p>
+                <p class="eyebrow">YOUR ATTENDANCE</p>
 
-                    <h1>
-                        Hello, <span id="studentHallTicket">Student</span>
-                    </h1>
+                <h1>
+                    Hello,
+                    <span id="studentHallTicket">Student</span>
+                </h1>
 
-                    <p class="welcome-text">
-                        Here's your latest attendance information.
-                    </p>
-                </div>
+                <p class="welcome-text">
+                    Here's your latest attendance information.
+                </p>
 
             </div>
 
 
-            <!-- Attendance overview -->
-            <section class="overview-grid">
+            <!-- ATTENDANCE OVERVIEW -->
+
+            <section class="overview-grid" aria-label="Attendance overview">
+
+                <!-- Overall Attendance -->
 
                 <article class="attendance-card primary-card">
 
-                    <div class="card-label">
-                        Overall Attendance
+                    <div class="card-label">Overall Attendance</div>
+
+                    <div class="attendance-value" aria-live="polite">
+                        <span id="overallPercentage">--</span><small>%</small>
                     </div>
 
-                    <div class="attendance-value">
-                        <span id="overallPercentage">--</span>
-                        <small>%</small>
+                    <div
+                        class="progress-track"
+                        id="overallTrack"
+                        role="progressbar"
+                        aria-label="Overall attendance"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                        aria-valuenow="0"
+                    >
+                        <div class="progress-fill" id="overallBar"></div>
+                        <span class="progress-threshold" title="75% minimum"></span>
+                    </div>
+
+                    <div class="progress-note" id="overallNote">
+                        Waiting for attendance data
                     </div>
 
                     <div class="attendance-meta">
-                        <span id="overallAttended">--</span>
-                        attended
+                        <span id="overallAttended">--</span> attended
                         <span class="dot">•</span>
-                        <span id="overallConducted">--</span>
-                        conducted
+                        <span id="overallConducted">--</span> conducted
                     </div>
 
                 </article>
 
 
+                <!-- Today's Attendance -->
+
                 <article class="attendance-card">
 
-                    <div class="card-label">
-                        Today's Attendance
-                    </div>
+                    <div class="card-label">Today's Attendance</div>
 
-                    <div id="todayStatus" class="today-status">
+                    <div id="todayStatus" class="today-status" aria-live="polite">
                         Checking...
                     </div>
 
@@ -112,75 +144,70 @@
             </section>
 
 
-            <!-- Last updated -->
+            <!-- LAST UPDATED + UPDATE BUTTON -->
+
             <div class="updated-card">
 
-                <div class="updated-icon">
-                    ↻
+                <div class="updated-icon" aria-hidden="true">↻</div>
+
+                <div class="updated-information">
+                    <div class="updated-label">Last updated</div>
+                    <div id="lastUpdated">Checking...</div>
                 </div>
 
-                <div>
-                    <div class="updated-label">
-                        Last updated
-                    </div>
+                <div class="update-action">
 
-                    <div id="lastUpdated">
-                        Checking...
-                    </div>
+                    <button
+                        id="updateAttendanceButton"
+                        class="update-attendance-button"
+                        type="button"
+                    >
+                        <span class="update-button-icon" aria-hidden="true">↻</span>
+                        <span id="updateButtonText">Update Attendance</span>
+                    </button>
+
                 </div>
 
             </div>
 
 
-            <!-- Empty state -->
+            <!-- EMPTY STATE -->
+
             <section id="emptyState" class="empty-state hidden">
 
-                <div class="empty-icon">
-                    ✨
-                </div>
+                <div class="empty-icon" aria-hidden="true">✨</div>
 
-                <h2>
-                    Nothing to show... yet.
-                </h2>
+                <h2>Nothing to show... yet.</h2>
 
                 <p>
                     Your attendance dashboard is ready.
-                    Come back tomorrow and see where you stand.
+                    Tap <strong>Update Attendance</strong> above to fetch your latest records.
                 </p>
 
             </section>
 
 
-            <!-- History -->
+            <!-- ATTENDANCE HISTORY -->
+
             <section id="historySection" class="history-section">
 
                 <div class="section-heading">
-
                     <div>
-                        <p class="eyebrow">
-                            ATTENDANCE HISTORY
-                        </p>
-
-                        <h2>
-                            Recent days
-                        </h2>
+                        <p class="eyebrow">ATTENDANCE HISTORY</p>
+                        <h2>Recent days</h2>
                     </div>
-
                 </div>
 
-
                 <div id="historyList" class="history-list">
-
-                    <div class="loading">
-                        Loading attendance...
-                    </div>
-
+                    <div class="loading">Loading attendance...</div>
                 </div>
 
             </section>
 
         </section>
 
+
+        <!-- FOOTER -->
 
         <footer>
             SCCE Student Attendance
@@ -189,7 +216,77 @@
     </main>
 
 
+    <!-- =========================================================
+         ATTENDANCE UPDATE OVERLAY
+         Stays on the same page while the API request runs.
+    ========================================================== -->
+
+    <div
+        id="attendanceUpdateOverlay"
+        class="attendance-update-overlay"
+        aria-hidden="true"
+    >
+
+        <div
+            id="attendanceUpdateModal"
+            class="attendance-update-modal"
+            role="status"
+            aria-live="polite"
+        >
+
+            <div class="update-loader">
+                <div class="loader-ring"></div>
+                <div id="loaderIcon" class="loader-check" aria-hidden="true">✓</div>
+            </div>
+
+            <h2 id="updateLoadingTitle">Updating Attendance</h2>
+
+            <p id="updateLoadingText">We're checking your latest attendance.</p>
+
+            <div class="update-progress" aria-hidden="true">
+                <div class="update-progress-bar"></div>
+            </div>
+
+            <p class="update-warning">
+                Please wait while we update your attendance.
+            </p>
+
+            <button id="updateDismissButton" class="update-dismiss-button" type="button">
+                Got it
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- DASHBOARD JAVASCRIPT -->
+
     <script type="module" src="js/student-dashboard.js"></script>
+
+
+    <!-- =========================================================
+         SERVICE WORKER
+
+         Disabled during local attendance API testing.
+         Restore the real /sw.js registration later.
+    ========================================================== -->
+
+
+<script>
+    if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+            navigator.serviceWorker
+                .register("/sw.js")
+                .then((registration) => {
+                    console.log("SCCE Service Worker registered:", registration.scope);
+                })
+                .catch((error) => {
+                    console.error("Service Worker registration failed:", error);
+                });
+        });
+    }
+</script>
 
 </body>
 

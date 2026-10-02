@@ -1,94 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>SCCE Attendance</title>
-
-    <meta
-        name="description"
-        content="Check your SCCE student attendance"
-    >
-
-    <link rel="stylesheet" href="css/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SCCE Attendance — Check Attendance in Seconds</title>
+<meta name="description" content="SCCE Attendance helps students quickly view attendance, history, and calculate the attendance they need.">
+<meta name="theme-color" content="#6557f5">
+<link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
+<div class="page-shell">
+<div class="orb orb-one"></div><div class="orb orb-two"></div><div class="grid-glow"></div>
 
-    <main class="page">
+<header class="site-header">
+<a class="brand" href="#" aria-label="SCCE Attendance home">
+<span class="brand-mark">✓</span><span class="brand-copy"><strong>SCCE Attendance</strong><small>Student Portal</small></span>
+</a>
+<div class="header-status"><span class="live-dot"></span>Attendance portal online</div>
+</header>
 
-        <section class="welcome-card">
+<main>
+<section class="hero-section">
+<div class="hero-copy">
+<div class="eyebrow"><span class="eyebrow-dot"></span>Built for SCCE students</div>
+<h1>Your attendance.<span>In seconds.</span></h1>
+<p class="hero-description">Stop searching through pages and waiting around. Enter your hall ticket and get your latest attendance, complete history, and useful calculations in one place.</p>
 
-            <div class="logo" id="secretAdminTrigger">
-    <span class="logo-icon">✓</span>
-    <span>SCCE Attendance</span>
+<div class="speed-promise"><div class="speed-icon">⚡</div><div><strong>Fast attendance fetch</strong><span>Get your latest available attendance without the usual hassle.</span></div></div>
+
+<div class="login-card" id="login">
+<div class="login-heading"><div><span class="login-kicker">STUDENT LOGIN</span><h2>Check my attendance</h2></div><span class="secure-badge">Secure</span></div>
+<form id="studentForm">
+<label for="hallTicket">Hall Ticket Number</label>
+<div class="input-wrapper"><span class="input-icon">ID</span>
+<input type="text" id="hallTicket" name="hallTicket" placeholder="e.g. 23N01A0501" autocomplete="off" autocapitalize="characters" spellcheck="false" required>
+</div>
+<button type="submit" id="proceedButton"><span>View my attendance</span><span class="button-arrow">→</span></button>
+</form>
+<p id="errorMessage" class="error-message"></p>
+<div class="login-footnote"><span>✓</span>Enter your SCCE hall ticket number to continue</div>
+</div>
 </div>
 
-            <div class="hero">
+<div class="hero-visual">
+<div class="visual-glow"></div>
+<div class="dashboard-preview">
+<div class="preview-top"><div class="mini-brand"><span>✓</span><div><b>SCCE Attendance</b><small>Student dashboard</small></div></div><span class="preview-live">LIVE</span></div>
+<div class="preview-welcome"><small>YOUR ATTENDANCE</small><div class="preview-number"><strong>82.4</strong><span>%</span></div><div class="preview-progress"><span style="width:82.4%"></span></div><div class="preview-meta"><span>✓ Above 75% target</span><span>Updated recently</span></div></div>
+<div class="preview-cards">
+<div class="mini-card"><span class="mini-icon purple">◷</span><div><small>History</small><b>Full records</b></div></div>
+<div class="mini-card"><span class="mini-icon green">⌁</span><div><small>Calculator</small><b>Smart insights</b></div></div>
+</div>
+<div class="preview-history"><div class="history-title"><b>Recent attendance</b><span>View all →</span></div>
+<div class="history-row"><span>01 Oct 2026</span><b class="present">100%</b></div>
+<div class="history-row"><span>30 Sep 2026</span><b class="present">86%</b></div>
+<div class="history-row"><span>29 Sep 2026</span><b class="absent">71%</b></div>
+</div></div>
+<div class="floating-chip chip-speed"><span>⚡</span><div><b>Fast fetch</b><small>Attendance ready</small></div></div>
+<div class="floating-chip chip-calc"><span>◎</span><div><b>Smart calculator</b><small>Know what you need</small></div></div>
+</div>
+</section>
 
-                <div class="hero-badge">
-                    Student Portal
-                </div>
+<section class="stats-section" aria-label="SCCE Attendance statistics">
+<div class="section-label"><span class="pulse"></span>Platform activity</div>
+<div class="stats-grid">
+<div class="stat-card"><span class="stat-icon">◉</span><div><strong id="totalUsers" data-value="100">100+</strong><span>Students served</span></div></div>
+<div class="stat-card"><span class="stat-icon">↗</span><div><strong id="todayVisits" data-value="24">24+</strong><span>Visits today</span></div></div>
+<div class="stat-card"><span class="stat-icon">⚡</span><div><strong>Seconds</strong><span>Fast attendance access</span></div></div>
+<div class="stat-card"><span class="stat-icon">✓</span><div><strong>24/7</strong><span>Student access</span></div></div>
+</div>
+<p class="stats-note"><span>●</span>Numbers shown here can be connected to your Firebase analytics.</p>
+</section>
 
-                <h1>
-                    Check your<br>
-                    <span>attendance.</span>
-                </h1>
+<section class="features-section">
+<div class="section-heading"><div><span class="section-kicker">WHY STUDENTS USE IT</span><h2>More than just a percentage.</h2></div><p>Everything you need to understand where your attendance stands and what to do next.</p></div>
+<div class="features-grid">
+<article class="feature-card feature-primary"><div class="feature-number">01</div><div class="feature-icon">⚡</div><h3>Attendance in seconds</h3><p>Fetch your latest available attendance without manually navigating the college portal.</p><span class="feature-tag">Fast access</span></article>
+<article class="feature-card"><div class="feature-number">02</div><div class="feature-icon">▤</div><h3>Complete attendance history</h3><p>See daily attendance records in a clean, easy-to-understand timeline.</p><span class="feature-tag">Full history</span></article>
+<article class="feature-card"><div class="feature-number">03</div><div class="feature-icon">◎</div><h3>Smart attendance calculator</h3><p>Understand how many classes you need to attend, or how your percentage changes with future classes.</p><span class="feature-tag">Plan ahead</span></article>
+<article class="feature-card"><div class="feature-number">04</div><div class="feature-icon">🏎</div><h3>Rapid Drift while it updates</h3><p>When an attendance update takes a little time, stay on the page and play Rapid Drift while you wait.</p><span class="feature-tag">Built in</span></article>
+</div>
+</section>
 
-                <p>
-                    Enter your hall ticket number to view
-                    your attendance details.
-                </p>
+<section class="how-section"><div class="how-card">
+<div class="how-left"><span class="section-kicker">HOW IT WORKS</span><h2>Three steps. No confusion.</h2><p>Your hall ticket is all you need to start.</p></div>
+<div class="steps">
+<div class="step"><span>1</span><div><b>Enter hall ticket</b><small>Use your SCCE student hall ticket number.</small></div></div>
+<div class="step"><span>2</span><div><b>Fetch attendance</b><small>Get the latest available attendance data.</small></div></div>
+<div class="step"><span>3</span><div><b>Understand it</b><small>Check history and use the calculator.</small></div></div>
+</div></div></section>
+</main>
 
-                <form id="studentForm">
+<footer class="site-footer"><div><strong>SCCE Attendance</strong><span>Made for SCCE students.</span></div><span>© 2026 SCCE Attendance</span></footer>
+</div>
 
-                    <label for="hallTicket">
-                        Hall Ticket Number
-                    </label>
+<!-- Existing admin trigger preserved by ID. -->
+<button id="secretAdminTrigger" class="secret-admin-trigger" type="button" aria-label="Admin"></button>
 
-                    <div class="input-wrapper">
-                        <input
-                            type="text"
-                            id="hallTicket"
-                            name="hallTicket"
-                            placeholder="e.g. 23N01A0501"
-                            autocomplete="off"
-                            autocapitalize="characters"
-                            required
-                        >
-                    </div>
-
-                    <button
-                        type="submit"
-                        id="proceedButton"
-                    >
-                        <span>Proceed</span>
-                        <span class="arrow">→</span>
-                    </button>
-
-                </form>
-
-                <p
-                    id="errorMessage"
-                    class="error-message"
-                ></p>
-
-            </div>
-
-            <div class="footer-note">
-                <span>●</span>
-                SCCE Student Attendance
-            </div>
-
-        </section>
-
-    </main>
-
-    <script
-        type="module"
-        src="js/student.js"
-    ></script>
-
+<!-- Existing login process preserved. -->
+<script type="module" src="js/student.js"></script>
+<script>
+document.querySelectorAll(".stat-card strong[data-value]").forEach((el) => {
+ const target=Number(el.dataset.value), start=performance.now(), duration=900;
+ const tick=(now)=>{const p=Math.min((now-start)/duration,1),e=1-Math.pow(1-p,3);el.textContent=Math.round(target*e).toLocaleString("en-IN")+"+";if(p<1)requestAnimationFrame(tick)};
+ requestAnimationFrame(tick);
+});
+</script>
 </body>
 </html>

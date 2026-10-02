@@ -5,22 +5,28 @@
 
 /* =========================================================
    GET ATTENDANCE FROM SESSION
+
+   Dashboard must provide:
+   { attended: 130, conducted: 286 }
 ========================================================= */
 
-const savedStats =
-    JSON.parse(
-        sessionStorage.getItem("attendanceStats") || "null"
-    );
+function readSavedStats() {
+
+    try {
+
+        return JSON.parse(
+            sessionStorage.getItem("attendanceStats") || "null"
+        );
+
+    } catch {
+
+        return null;
+    }
+}
 
 
-/*
- * Dashboard must provide:
- *
- * {
- *     attended: 130,
- *     conducted: 286
- * }
- */
+const savedStats = readSavedStats();
+
 
 if (
     !savedStats ||
@@ -40,7 +46,7 @@ if (
             align-items:center;
             justify-content:center;
             padding:24px;
-            font-family:Arial,sans-serif;
+            font-family:Inter,system-ui,-apple-system,'Segoe UI',sans-serif;
             background:#f7f9ff;
         ">
 
@@ -55,18 +61,11 @@ if (
                 box-shadow:0 10px 30px rgba(25,35,65,.08);
             ">
 
-                <h2 style="
-                    margin:0 0 10px;
-                    color:#11182b;
-                ">
+                <h2 style="margin:0 0 10px;color:#11182b;">
                     Attendance data unavailable
                 </h2>
 
-                <p style="
-                    margin:0;
-                    color:#7a8498;
-                    line-height:1.6;
-                ">
+                <p style="margin:0;color:#7a8498;line-height:1.6;">
                     Please open the dashboard first so your
                     latest attendance can be loaded.
                 </p>
@@ -76,7 +75,7 @@ if (
                     style="
                         display:inline-block;
                         margin-top:20px;
-                        padding:11px 18px;
+                        padding:12px 18px;
                         border-radius:10px;
                         background:#6857e8;
                         color:white;
@@ -102,134 +101,148 @@ if (
    REAL ATTENDANCE
 ========================================================= */
 
-const attended =
-    savedStats.attended;
+const attended = savedStats.attended;
+const conducted = savedStats.conducted;
 
-const conducted =
-    savedStats.conducted;
+const prefersReducedMotion =
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 
 /* =========================================================
    ELEMENTS
 ========================================================= */
 
-const targetSelect =
-    document.getElementById(
-        "targetSelect"
-    );
+const $ = (id) => document.getElementById(id);
 
-const attendSelect =
-    document.getElementById(
-        "attendSelect"
-    );
+const targetSelect = $("targetSelect");
+const attendSelect = $("attendSelect");
+const missSelect = $("missSelect");
+const customAttend = $("customAttend");
+const customMiss = $("customMiss");
 
-const missSelect =
-    document.getElementById(
-        "missSelect"
-    );
+const percentageCircle = $("percentageCircle");
+const currentPercentage = $("currentPercentage");
+const attendedCount = $("attendedCount");
+const conductedCount = $("conductedCount");
+const targetStatus = $("targetStatus");
+const classesNeeded = $("classesNeeded");
+const targetMessage = $("targetMessage");
 
-const customAttend =
-    document.getElementById(
-        "customAttend"
-    );
+const attendResult = $("attendResult");
+const attendChange = $("attendChange");
+const missResult = $("missResult");
+const missChange = $("missChange");
+const customResult = $("customResult");
+const customChange = $("customChange");
 
-const customMiss =
-    document.getElementById(
-        "customMiss"
-    );
-
-
-const currentPercentage =
-    document.getElementById(
-        "currentPercentage"
-    );
-
-const attendedCount =
-    document.getElementById(
-        "attendedCount"
-    );
-
-const conductedCount =
-    document.getElementById(
-        "conductedCount"
-    );
-
-const targetStatus =
-    document.getElementById(
-        "targetStatus"
-    );
-
-const classesNeeded =
-    document.getElementById(
-        "classesNeeded"
-    );
-
-const targetMessage =
-    document.getElementById(
-        "targetMessage"
-    );
-
-const attendResult =
-    document.getElementById(
-        "attendResult"
-    );
-
-const attendChange =
-    document.getElementById(
-        "attendChange"
-    );
-
-const missResult =
-    document.getElementById(
-        "missResult"
-    );
-
-const missChange =
-    document.getElementById(
-        "missChange"
-    );
-
-const customResult =
-    document.getElementById(
-        "customResult"
-    );
-
-const customChange =
-    document.getElementById(
-        "customChange"
-    );
+const avatar = $("avatar");
+const hallTicketLabel = $("hallTicket");
 
 
 /* =========================================================
-   CALCULATE PERCENTAGE
+   STUDENT INFO (header)
 ========================================================= */
 
-function calculatePercentage(
-    attended,
-    conducted
-) {
+const hallTicket = sessionStorage.getItem("hallTicket");
+
+if (hallTicket) {
+
+    hallTicketLabel.textContent = hallTicket;
+
+    avatar.textContent =
+        hallTicket.trim().charAt(0).toUpperCase() || "S";
+}
+
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+function calculatePercentage(attended, conducted) {
 
     if (conducted <= 0) {
         return 0;
     }
 
-    return (
-        attended /
-        conducted *
-        100
-    );
-
+    return (attended / conducted) * 100;
 }
 
 
-/* =========================================================
-   FORMAT PERCENTAGE
-========================================================= */
-
 function formatPercentage(value) {
-
     return value.toFixed(1) + "%";
+}
 
+
+function formatChange(change, showArrow = "") {
+
+    const sign = change > 0 ? "+" : "";
+
+    return `${showArrow}${showArrow ? " " : ""}${sign}${change.toFixed(1)}%`;
+}
+
+
+/* Small "pop" so students notice a value changed */
+
+function bump(element) {
+
+    if (!element || prefersReducedMotion) {
+        return;
+    }
+
+    element.classList.remove("bump");
+
+    void element.offsetWidth;
+
+    element.classList.add("bump");
+}
+
+
+/* Set text, and pop only if it actually changed */
+
+function setText(element, text, animate) {
+
+    if (element.textContent === text) {
+        return;
+    }
+
+    element.textContent = text;
+
+    if (animate) {
+        bump(element);
+    }
+}
+
+
+function pluralize(count, word = "class") {
+    return `${count} ${word}${count === 1 ? "" : "es"}`;
+}
+
+
+function animateNumber(element, target, render, duration = 900) {
+
+    if (prefersReducedMotion) {
+        element.textContent = render(target);
+        return;
+    }
+
+    const start = performance.now();
+
+    const tick = (now) => {
+
+        const progress = Math.min((now - start) / duration, 1);
+
+        const eased = 1 - Math.pow(1 - progress, 3);
+
+        element.textContent = render(target * eased);
+
+        if (progress < 1) {
+            requestAnimationFrame(tick);
+        } else {
+            element.textContent = render(target);
+        }
+    };
+
+    requestAnimationFrame(tick);
 }
 
 
@@ -237,151 +250,74 @@ function formatPercentage(value) {
    CURRENT ATTENDANCE
 ========================================================= */
 
-const current =
-    calculatePercentage(
-        attended,
-        conducted
-    );
+const current = calculatePercentage(attended, conducted);
 
 
-/*
- * Update current attendance card
- */
+/* Circle ring reflects the REAL percentage */
 
-currentPercentage.textContent =
-    formatPercentage(current);
-
-attendedCount.textContent =
-    attended;
-
-conductedCount.textContent =
-    conducted;
-
-
-/*
- * Debug
- */
-
-console.log(
-    "Calculator attendance:",
-    {
-        attended,
-        conducted,
-        percentage: current
-    }
+percentageCircle.style.setProperty(
+    "--pct",
+    Math.max(0, Math.min(current, 100)).toFixed(2)
 );
+
+animateNumber(currentPercentage, current, formatPercentage);
+
+attendedCount.textContent = attended;
+conductedCount.textContent = conducted;
 
 
 /* =========================================================
    TARGET CALCULATOR
 ========================================================= */
 
-function updateTarget() {
+function updateTarget(animate = true) {
 
-    const target =
-        Number(
-            targetSelect.value
-        );
+    const target = Number(targetSelect.value);
+
+    targetStatus.classList.remove("is-info");
+    targetMessage.classList.remove("is-info");
 
 
-    /*
-     * Already reached target
-     */
+    // Already reached target
 
     if (current >= target) {
 
-        classesNeeded.textContent =
-            "0 classes";
+        setText(classesNeeded, "0 classes", animate);
 
         targetMessage.textContent =
             `You're already above ${target}%.`;
 
-        targetMessage.style.color =
-            "#16a875";
-
         targetStatus.textContent =
             `✓ You're above your ${target}% target!`;
-
-        targetStatus.style.background =
-            "#e9faf3";
-
-        targetStatus.style.color =
-            "#087d58";
 
         return;
     }
 
 
-    /*
-     * Formula:
-     *
-     * (A + x) / (C + x) >= target
-     *
-     * x >=
-     *
-     * (target*C - A)
-     * ----------------
-     * (1 - target)
-     */
+    // (A + x) / (C + x) >= target  →  x >= (t*C - A) / (1 - t)
 
-    const targetDecimal =
-        target / 100;
+    const targetDecimal = target / 100;
 
+    const required = Math.ceil(
+        (targetDecimal * conducted - attended) /
+        (1 - targetDecimal)
+    );
 
-    const required =
-        Math.ceil(
-            (
-                targetDecimal *
-                conducted -
-                attended
-            ) /
-            (
-                1 -
-                targetDecimal
-            )
-        );
+    const safeRequired = Math.max(0, required);
 
-
-    const safeRequired =
-        Math.max(
-            0,
-            required
-        );
-
-
-    classesNeeded.textContent =
-        `${safeRequired} ${
-            safeRequired === 1
-                ? "class"
-                : "classes"
-        }`;
-
+    setText(classesNeeded, pluralize(safeRequired), animate);
 
     targetMessage.textContent =
         `Attend ${safeRequired} more ${
-            safeRequired === 1
-                ? "class"
-                : "classes"
+            safeRequired === 1 ? "class" : "classes"
         } to reach ${target}%.`;
 
-
-    targetMessage.style.color =
-        "#6857e8";
-
+    targetMessage.classList.add("is-info");
 
     targetStatus.textContent =
-        `You're ${(
-            target -
-            current
-        ).toFixed(1)}% below your ${target}% target.`;
+        `You're ${(target - current).toFixed(1)}% below your ${target}% target.`;
 
-
-    targetStatus.style.background =
-        "#f0edff";
-
-    targetStatus.style.color =
-        "#6857e8";
-
+    targetStatus.classList.add("is-info");
 }
 
 
@@ -389,39 +325,18 @@ function updateTarget() {
    WHAT IF ATTEND
 ========================================================= */
 
-function updateAttendScenario() {
+function updateAttendScenario(animate = true) {
 
-    const count =
-        Number(
-            attendSelect.value
-        );
-
+    const count = Number(attendSelect.value);
 
     const newAttendance =
-        calculatePercentage(
-            attended + count,
-            conducted + count
-        );
+        calculatePercentage(attended + count, conducted + count);
 
+    const change = newAttendance - current;
 
-    const change =
-        newAttendance -
-        current;
+    setText(attendResult, formatPercentage(newAttendance), animate);
 
-
-    attendResult.textContent =
-        formatPercentage(
-            newAttendance
-        );
-
-
-    attendChange.textContent =
-        `▲ ${
-            change >= 0
-                ? "+"
-                : ""
-        }${change.toFixed(1)}%`;
-
+    attendChange.textContent = formatChange(change, "▲");
 }
 
 
@@ -429,35 +344,18 @@ function updateAttendScenario() {
    WHAT IF MISS
 ========================================================= */
 
-function updateMissScenario() {
+function updateMissScenario(animate = true) {
 
-    const count =
-        Number(
-            missSelect.value
-        );
-
+    const count = Number(missSelect.value);
 
     const newAttendance =
-        calculatePercentage(
-            attended,
-            conducted + count
-        );
+        calculatePercentage(attended, conducted + count);
 
+    const change = newAttendance - current;
 
-    const change =
-        newAttendance -
-        current;
+    setText(missResult, formatPercentage(newAttendance), animate);
 
-
-    missResult.textContent =
-        formatPercentage(
-            newAttendance
-        );
-
-
-    missChange.textContent =
-        `▼ ${change.toFixed(1)}%`;
-
+    missChange.textContent = formatChange(change, "▼");
 }
 
 
@@ -465,46 +363,25 @@ function updateMissScenario() {
    CUSTOM SCENARIO
 ========================================================= */
 
-function updateCustomScenario() {
+function updateCustomScenario(animate = true) {
 
-    const attend =
-        Number(
-            customAttend.value
-        );
-
-    const miss =
-        Number(
-            customMiss.value
-        );
-
+    const attend = Number(customAttend.value);
+    const miss = Number(customMiss.value);
 
     const newAttendance =
         calculatePercentage(
             attended + attend,
-            conducted +
-            attend +
-            miss
+            conducted + attend + miss
         );
 
+    const change = newAttendance - current;
 
-    const change =
-        newAttendance -
-        current;
+    setText(customResult, formatPercentage(newAttendance), animate);
 
+    customChange.textContent = formatChange(change);
 
-    customResult.textContent =
-        formatPercentage(
-            newAttendance
-        );
-
-
-    customChange.textContent =
-        `${
-            change >= 0
-                ? "+"
-                : ""
-        }${change.toFixed(1)}%`;
-
+    // Green when it goes up (or stays), red when it drops
+    customChange.classList.toggle("is-down", change < 0);
 }
 
 
@@ -512,44 +389,22 @@ function updateCustomScenario() {
    EVENTS
 ========================================================= */
 
-targetSelect.addEventListener(
-    "change",
-    updateTarget
-);
+targetSelect.addEventListener("change", () => updateTarget());
 
+attendSelect.addEventListener("change", () => updateAttendScenario());
 
-attendSelect.addEventListener(
-    "change",
-    updateAttendScenario
-);
+missSelect.addEventListener("change", () => updateMissScenario());
 
+customAttend.addEventListener("change", () => updateCustomScenario());
 
-missSelect.addEventListener(
-    "change",
-    updateMissScenario
-);
-
-
-customAttend.addEventListener(
-    "change",
-    updateCustomScenario
-);
-
-
-customMiss.addEventListener(
-    "change",
-    updateCustomScenario
-);
+customMiss.addEventListener("change", () => updateCustomScenario());
 
 
 /* =========================================================
    INITIALIZE
 ========================================================= */
 
-updateTarget();
-
-updateAttendScenario();
-
-updateMissScenario();
-
-updateCustomScenario();
+updateTarget(false);
+updateAttendScenario(false);
+updateMissScenario(false);
+updateCustomScenario(false);
